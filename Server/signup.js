@@ -7,7 +7,7 @@ app.use(express.json()
 app.use(cors())
 
 const {MongoClient, CURSOR_FLAGS} = require("mongodb")
-const url ="mongodb://localhost:27017"
+const url ="mongodb+srv://jitendraumore99:0wy73T6HU7ahAkIL@animecom.ukiff.mongodb.net/"
 const client = new MongoClient(url)
 const dbConnection = async()=>{
     const result = await client.connect()

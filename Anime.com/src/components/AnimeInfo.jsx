@@ -75,22 +75,20 @@ export const AnimeInfo = ({ data }) => {
           <img className='  w-full' src={`https://anime-com-backend.onrender.com/${anime.bgimage}`} alt={anime.image} />
           <div className="flex px-10 gap-10 w-100%">
 
-            <div className=" w-[70%] ms-10">
-              <p className="text-5xl py-6 font-semibold  w-[70%]">
-                {anime.name}
-              </p>
+            <div className=" w-[70%] mt-20">
               <div className="bg-transparent">
                 <iframe
-                  className="w-full"
-                  height="350"
+                  className="w-full h-[400px] "
                   src={`https://www.youtube.com/embed/${anime.youtube}`}
                   title="YouTube video player"
                   frameBorder="0" // Add frameBorder attribute
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-
               </div>
+              <p className="text-5xl py-5 font-semibold  w-full">
+                {anime.name}
+              </p>
               <button onClick={watchList} className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-6 border-[#f6baa1]">
                 <FaBookmark className="bg-transparent" />
                 Add To WatchList
@@ -121,7 +119,7 @@ export const AnimeInfo = ({ data }) => {
               </div>
             </div>
             <div className="">
-              <img className="h-[70%] pt-24" src={`https://anime-com-backend.onrender.com/${anime.image}`} alt={anime.image} />
+              <img className="pt-20" src={`https://anime-com-backend.onrender.com/${anime.image}`} alt={anime.image} />
             </div>
           </div>
         </div>

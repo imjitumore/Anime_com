@@ -81,7 +81,7 @@ export const AnimeInfo = ({ data }) => {
               </p>
               <div className="bg-transparent">
                 <iframe
-                  width="100%"
+                  className="w-full"
                   height="350"
                   src={`https://www.youtube.com/embed/${anime.youtube}`}
                   title="YouTube video player"

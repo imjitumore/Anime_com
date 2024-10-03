@@ -44,7 +44,7 @@ export const AnimeInfo = ({ data }) => {
     console.log("function called");
   
     try {
-      const response = await fetch('http://localhost:4000/api/watchlist', {
+      const response = await fetch('https://anime-com-backend.onrender.com/api/watchlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(anime),
@@ -72,7 +72,7 @@ export const AnimeInfo = ({ data }) => {
         "Loading"
       ) : (
         <div className="text-white group overflow-hidden h-full">
-          <img className='  w-full' src={`http://localhost:4000/${anime.bgimage}`} alt={anime.image} />
+          <img className='  w-full' src={`https://anime-com-backend.onrender.com/${anime.bgimage}`} alt={anime.image} />
           <div className="flex px-10 w-100%">
            
             <div className=" w-[70%] ms-10">
@@ -120,7 +120,7 @@ export const AnimeInfo = ({ data }) => {
               </div>
             </div>
              <div className="">
-              <img className="h-[70%] pt-24" src={`http://localhost:4000/${anime.image}`} alt={anime.image} />
+              <img className="h-[70%] pt-24" src={`https://anime-com-backend.onrender.com/${anime.image}`} alt={anime.image} />
             </div>
           </div>
         </div>

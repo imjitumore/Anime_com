@@ -6,7 +6,7 @@ export const Watchlist = ({ data }) => {
 
     const [watchdata, setData] = useState([])
     useEffect(() => {
-        fetch("http://localhost:4000/api/getwatchlist").then(respose => {
+        fetch("https://anime-com-backend.onrender.com/api/getwatchlist").then(respose => {
             return respose.json()
         })
             .then(data => setData(data))
@@ -25,7 +25,7 @@ export const Watchlist = ({ data }) => {
 
                                 <div className='flex my-2 justify-between gap-2 mx-10 '>
                                     <div>
-                                        <img className='text-white h-36 ' src={`http://localhost:4000/${item.image}`} alt={item.image} />
+                                        <img className='text-white h-36 ' src={`https://anime-com-backend.onrender.com/${item.image}`} alt={item.image} />
                                     </div>
                                     <div className='text-white w-60 text-2xl font-semibold'>{item.name}</div>
                                     <div>

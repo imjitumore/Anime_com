@@ -42,25 +42,25 @@ export const AnimeInfo = ({ data }) => {
 
   async function watchList() {
     console.log("function called");
-  
+
     try {
       const response = await fetch('https://anime-com-backend.onrender.com/api/watchlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(anime),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to add to watchlist');
       }
-  
+
       const result = await response.json();
       console.log("Watchlist response:", result);
     } catch (error) {
       console.error("Error:", error);
     }
   }
-  
+
   useEffect(() => {
     setSeriesCategory(data.filter((item) => item.category === category));
   }, [data]);
@@ -73,27 +73,28 @@ export const AnimeInfo = ({ data }) => {
       ) : (
         <div className="text-white group overflow-hidden h-full">
           <img className='  w-full' src={`https://anime-com-backend.onrender.com/${anime.bgimage}`} alt={anime.image} />
-          <div className="flex px-10 w-100%">
-           
+          <div className="flex px-10 gap-10 w-100%">
+
             <div className=" w-[70%] ms-10">
               <p className="text-5xl py-6 font-semibold  w-[70%]">
                 {anime.name}
               </p>
-              <div className="bg-transparent flex gap-4">
+              <div className="bg-transparent">
                 <iframe
-                  width="660"
+                  width="100%"
                   height="350"
                   src={`https://www.youtube.com/embed/${anime.youtube}`}
                   title="YouTube video player"
+                  frameBorder="0" // Add frameBorder attribute
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                
+
               </div>
               <button onClick={watchList} className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-6 border-[#f6baa1]">
-                  <FaBookmark  className="bg-transparent" />
-                  Add To WatchList
-                </button>
+                <FaBookmark className="bg-transparent" />
+                Add To WatchList
+              </button>
               <p className="text-lg font-semibold py-1">
                 Language: {anime.language}
               </p>
@@ -114,12 +115,12 @@ export const AnimeInfo = ({ data }) => {
                 Duration: {anime.duration}
               </p>
               <p className="text-lg font-semibold py-1">{anime.duration}</p>
-              <div>
+              <div className="w-full">
                 <p className="text-center text-3xl font-semibold">Summary: </p>
                 <p className="text-lg py-2">{anime.summary}</p>
               </div>
             </div>
-             <div className="">
+            <div className="">
               <img className="h-[70%] pt-24" src={`https://anime-com-backend.onrender.com/${anime.image}`} alt={anime.image} />
             </div>
           </div>

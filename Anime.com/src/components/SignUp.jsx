@@ -43,56 +43,59 @@ const SignUp = () => {
   };
   return (
     <>
-      <Navbar2/>
-      <div className="flex relative">
-      <div className="text-white border-2 py-6 px-8 mx-auto my-4 font-semibold">
-      <div className="">
-        <h2 className="text-3xl font-semibold text-center my-4">Create Account</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="my-3">
-            <label className="text-sm font-semibold">Email:</label><br />
-            <input
-              className="border-2 rounded-lg py-2 px-2 font-light w-full"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="Enter Your Email"
-            />
-          </div>
-          <div className="my-3">
-            <label className="text-sm font-semibold">Password:</label><br />
-            <input
-              className="border-2 rounded-lg py-2 px-2 font-light w-full"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Create Your Password"
-            />
-          </div>
-          <div className="my-2 ">
-            <label className="text-sm font-semibold">Confirm Password:</label><br />
-            <input
-              className="border-2 rounded-lg py-2 px-2 font-light w-full"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              placeholder="Confirm Your Password"
-            />
-          </div>
+      <Navbar2 />
+      <div className="flex  justify-center">
+        <div className="w-80">
+
+        </div>
+        <div className="text-white border-2 py-6 px-8 my-4 font-semibold">
           <div className="">
-            <button className="border-2 py-2 px-12 rounded-md bg-[#fc5d00] my-4 border-none text-center w-full" type="submit">Sign Up</button>
+            <h2 className="text-3xl font-semibold text-center my-4">Create Account</h2>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            <form onSubmit={handleSubmit}>
+              <div className="my-3">
+                <label className="text-sm font-semibold">Email:</label><br />
+                <input
+                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Enter Your Email"
+                />
+              </div>
+              <div className="my-3">
+                <label className="text-sm font-semibold">Password:</label><br />
+                <input
+                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Create Your Password"
+                />
+              </div>
+              <div className="my-2 ">
+                <label className="text-sm font-semibold">Confirm Password:</label><br />
+                <input
+                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  placeholder="Confirm Your Password"
+                />
+              </div>
+              <div className="">
+                <button className="border-2 py-2 px-12 rounded-md bg-[#fc5d00] my-4 border-none text-center w-full" type="submit">Sign Up</button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <div className="">
+            <img className="h-[400px] mt-4" src={signup} alt="" />
+          </div>
       </div>
-      <div className="absolute top-0 right-28">
-        <img className="h-[400px]" src={signup} alt="" />
-      </div>
-      </div>
-    </div>
     </>
   );
 };
@@ -180,11 +183,11 @@ const SignUp = () => {
 
 
 function SignPage() {
-  
+
 
   return (
     <>
-     
+
     </>
   )
 }

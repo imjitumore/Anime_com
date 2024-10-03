@@ -18,13 +18,12 @@ export const Animes = ({ data }) => {
         <div className="text-white font-semibold text-xl px-4">
             <p>Filtered By</p>
         </div>
-        <div className="grid grid-cols-5 gap-4 px-4 " onClick={scrollToTop}>
+        <div className="grid grid-cols-5  px-4 w-full " onClick={scrollToTop}>
           {data.map((item, i) => {
             console.log(item.category)
             return (
               <>
-              <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-                
+              <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>  
                 <Card
                   image={item.image}
                   name={item.name}

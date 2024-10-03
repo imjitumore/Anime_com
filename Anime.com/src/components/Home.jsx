@@ -64,7 +64,7 @@ export const Home = ({ dataa }) => {
                 <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}        >
                   <div className="slider">
                     <img
-                      className="slider w-full h-[600px] object-cover relative "
+                      className="slider w-full h-[630px] object-cover relative "
                       src={item.image}
                       alt=""
                     />
@@ -237,7 +237,7 @@ function Freeanime() {
   const settings = {
     infinite: true,
     speed: 300,
-    slidesToShow: 5,
+    slidesToShow:5,
     slidesToScroll: 2,
     autoplaySpeed: 2000,
     arrows: false,

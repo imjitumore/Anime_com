@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    font-family:Verdana, Geneva, Tahoma;
+}
+
+
+ :root{
+    --sb-track-color: #232E33;
+    --sb-thumb-color: #6BAF8D;
+    --sb-size: 10px;
+    --sb-sizee: 0px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-sizee)
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+    
+  }
+  
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color)
+                       var(--sb-track-color);
+    }
+  }

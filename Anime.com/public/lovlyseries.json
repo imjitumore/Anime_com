@@ -1,0 +1,120 @@
+[
+    {
+        "image":"/conditionlove.jpg",
+        "name":"A condtion called love",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    },
+    {
+        "image":"/frieren.jpg",
+        "name":"Freiecen beyond jourany end",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/zom100.jpg",
+        "name":"Zom 100",
+        "language":"Sub | Dub",
+        "category":"fantacy"
+    }, {
+        "image":"/datingsam.jpe",
+        "name":"Trapped in dating sam",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/iminlove.jpg",
+        "name":"I'm in love with the vilainless",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/masamune.jpe",
+        "name":"Masamune kou'n revenge",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/horimiya.jpg",
+        "name":"Horimiya",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/voiceactor.jpg",
+        "name":"The many sides of voice actor radio",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }
+    , {
+        "image":"/hokkaidogals.jpg",
+        "name":"Hokkaido gals are super adorable",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    }, {
+        "image":"/mysterious.jpe",
+        "name":"The maid i hired recently is mysterious",
+        "language":"Sub | Dub",
+        "category":"romantic"
+    },
+    {
+        "image": "./yamada.jpe",
+        "name": "My love story with yamada kon level 999",
+        "language": "Sub | Dub",
+        "category":"romantic"
+      },
+      {
+        "image": "./chainsawman.jpg",
+        "name": "Chainsaw man",
+        "language": "Sub | Dub",
+        "category":"action"
+      },
+      {
+        "image": "./darling.jpg",
+        "name": "My dress up darling",
+        "language": "Sub | Dub",
+        "category":"romantic"
+      },
+      {
+        "bgimage": "./nierautomatabg.jpg",
+        "image": "./nierautomata.jpg",
+        "name": "Neir automata",
+        "language": "Sub | Dub",
+        "category":"action"
+        
+      },
+      { "image": "./naruto.jpg",
+       "name": "Naruto",
+        "language": "Sub | Dub",
+        "category":"action"
+      },
+      { "image": "./angle.jpe",
+       "name": "Angle the next door",
+        "language": "Sub | Dub",
+        "category":"lovely"
+      },
+      {
+        "image": "./relife.jpe",
+        "name": "Relife",
+        "language": "Sub | Dub",
+        "category":"drama"
+      },
+      {
+        "image": "./kaiju8.jpg",
+        "name": "Kaiju 8",
+        "language": "Sub | Dub",
+        "category":"fantasy"
+      },
+      {
+        "image": "./myonehittokillsister.jpe",
+        "name": "My one hit to kill sister",
+        "language": "Sub | Dub",
+        "category":"fantasy"
+      },
+      { "image": "./tomochan.jpg",
+       "name": "Tomo chan is a girl",
+        "language": "Sub | Dub",
+        "category":"romantic"
+      },
+      { "image": "./myheroacadmia.jpg",
+       "name": "My hero acadmia",
+        "language": "Sub | Dub"  ,
+          "category":"fantasy"
+      }
+
+]

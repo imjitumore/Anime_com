@@ -1,0 +1,66 @@
+[
+  {
+    "image": "./yamada.jpe",
+    "name": "My love story with yamada kon level 999",
+    "language": "Sub | Dub",
+    "category":"lovely"
+  },
+  {
+    "image": "./chainsawman.jpg",
+    "name": "Chainsaw man",
+    "language": "Sub | Dub",
+    "category":"action"
+  },
+  {
+    "image": "./darling.jpg",
+    "name": "My dress up darling",
+    "language": "Sub | Dub",
+    "category":"romantic"
+  },
+  {
+    "bgimage": "./nierautomatabg.jpg",
+    "image": "./nierautomata.jpg",
+    "name": "Neir automata",
+    "language": "Sub | Dub",
+    "category":"action"
+  },
+  { "image": "./naruto.jpg",
+   "name": "Naruto",
+    "language": "Sub | Dub",
+    "category":"action"
+  },
+  { "image": "./angle.jpe",
+   "name": "Angle the next door",
+    "language": "Sub | Dub",
+    "category":"romantic"
+  },
+  {
+    "image": "./relife.jpe",
+    "name": "Relife",
+    "language": "Sub | Dub",
+    "category":"drama"
+
+  },
+  {
+    "image": "./kaiju8.jpg",
+    "name": "Kaiju 8",
+    "language": "Sub | Dub",
+    "category":"fantasy"
+  },
+  {
+    "image": "./myonehittokillsister.jpe",
+    "name": "My one hit to kill sister",
+    "language": "Sub | Dub",
+    "category":"romantic"
+  },
+  { "image": "./tomochan.jpg",
+   "name": "Tomo chan is a girl",
+    "language": "Sub | Dub",
+    "category":"romantic"
+  },
+  { "image": "./myheroacadmia.jpg",
+   "name": "My hero acadmia",
+    "language": "Sub | Dub",
+    "category":"fantasy"
+  }
+]

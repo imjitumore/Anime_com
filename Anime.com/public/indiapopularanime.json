@@ -1,0 +1,68 @@
+[
+    {
+      "image": "./demonslayer.jpg",
+      "name": "Demon slayer",
+      "language": "Sub | Dub",
+      "category":"action"
+
+    },
+    {
+      "image": "./jujutsukaisen.jpe",
+      "name": "jujutsu kaisen",
+      "language": "Sub | Dub",
+      "category":"action"
+    },
+    {
+      "image": "./immortalking.jpg",
+      "name": "The daily life of immortal king",
+      "language": "Sub | Dub",
+      "category":"action"
+    },
+    {
+      "bgimage": "./nierautomatabg.jpg",
+      "image": "./nierautomata.jpg",
+      "name": "Neir automata",
+      "language": "Sub | Dub",
+      "category":"action"
+    },
+    { "image": "./alyarussian.jpg",
+     "name": "Alya sometimes hides her felling in russian",
+      "language": "Sub | Dub",
+      "category":"romantic"
+
+    },
+    { "image": "./spyfamily.jpg",
+     "name": "Spy family",
+      "language": "Sub | Dub",
+      "category":"drama"
+    },
+    {
+      "image": "./rentgirlfriend.jpg",
+      "name": "Rent a girlfriend",
+      "language": "Sub | Dub",
+      "category":"romantic"
+    },
+    {
+      "image": "./morethanmarriedcouplesbutnotlovers.jpg",
+      "name": "More than couples but not lovers ",
+      "language": "Sub | Dub",
+      "category":"romantic"
+    },
+    {
+      "image": "./onepunchman.jpg",
+      "name": "One punch man",
+      "language": "Sub | Dub",
+      "category":"action"
+    },
+    { "image": "./chainsawman.jpg",
+     "name": "Chainsaw man",
+      "language": "Sub | Dub",
+      "category":"action"
+    },
+    { "image": "./vampiredormitory.jpg",
+     "name": "Vampire dormitory",
+      "language": "Sub | Dub",
+      "category":"action"
+    }
+  ]
+  

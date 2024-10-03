@@ -1,0 +1,15 @@
+{
+    "version":2,
+    "name":"Anime.com-main",
+    "builds":[
+        {
+            "src":"signup.js",
+            "use":"@vercel/node"
+        }
+    ],
+    "routes":[
+        {
+            "src":"/(.*)","dest":"/signup.js"
+        }
+    ]
+}

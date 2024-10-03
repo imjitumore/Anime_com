@@ -13,8 +13,8 @@ import Login from './components/Login'
  import SignUp from './components/SignUp'
 import { Watchlist } from './components/Watchlist'
 
-import { Dashboard } from './components/Dashboard'
-import PrivateRoute from './components/Privateroute'
+// import { Dashboard } from './components/Dashboard'
+// import PrivateRoute from './components/Privateroute'
 
 function App() {
   const [animeData, setAnimeData] = useState([]);
@@ -60,13 +60,13 @@ function App() {
           <Route path='/card' element={<Animes data={animeData}/>} />
           <Route path='/watchlist' element={<Watchlist data={animeData}/>} />
           <Route path='/animeinfo/name/:name/category/:category' element={<AnimeInfo data={animeData}/>} />
-           <Route
+           {/* <Route
           path="/dashboard"
           element={
             <PrivateRoute>
               <Dashboard />
             </PrivateRoute>
-          }></Route> 
+          }></Route>  */}
       </Routes>
       </BrowserRouter> 
     </>

@@ -17,7 +17,7 @@ export const Navbar = () => {
           <div className='flex justify-end gap-8 font-bold text-2xl'>
               <div><CiSearch /></div>
              <Link to={"/watchlist"}><div><CiBookmark /></div></Link>
-              <div><CiUser /></div> 
+             <Link to={"/dashboard"}><div><CiUser /></div> </Link>
             </div>
         </div>
     </>

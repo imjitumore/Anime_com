@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import signup from "/signup.png"
 import login from "/login.webp"
 import { Navbar2 } from "./Navbar2";
@@ -31,14 +31,14 @@ const Login = () => {
         // Store user data or token in localStorage
         localStorage.setItem('user', JSON.stringify(data)); // Store the entire user object or token
         setSuccess('Login successful!');
-
-        // Redirect to dashboard
+        // Redirect to Home
         navigate('/home');
       }
     } catch (err) {
       setError('Failed to login');
     }
   };
+ // localStorage.removeItem('user'); // Remove user data from localStorage
 
   return (
     <>

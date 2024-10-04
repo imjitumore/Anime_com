@@ -1,33 +1,55 @@
 import React, { useEffect, useState } from 'react';
+import { CiIndent, CiPassport1, CiUser, CiViewList } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get the logged-in user from localStorage
     const loggedUser = localStorage.getItem('user');
-    
+
     if (loggedUser) {
-      // Parse the user object from localStorage
-      setUser(JSON.parse(loggedUser));
+      try {
+        setUser(JSON.parse(loggedUser));
+      } catch (error) {
+        console.error("Failed to parse user data:", error);
+        navigate('/login');
+      }
     } else {
-      // If no user found, redirect to login
       navigate('/login');
     }
+    setLoading(false); // set loading to false after checking
   }, [navigate]);
-  if (!user) return <p>Loading...</p>;
+
+
+  const logout = () => {
+    localStorage.removeItem('user'); // Remove user data from localStorage
+    navigate('/login'); // Redirect to the login page
+  };
+  if (loading) return <p>Loading...</p>;
 
   return (
-    <div className='text-center text-white my-20'>
-      <h2 className='text-3xl my-4' >Welcome to your dashboard, {user.email}</h2>
-      <p>Here is your account information:</p>
-      <ul>
-        <li>Email: {user.email}</li>
-        <li>User ID: {user.userId}</li> {/* Adjust this based on your user schema */}
-        {/* Add more user fields as necessary */}
-      </ul>
-    </div>
+    <>
+      <div className='flex justify-between items-center px-10 my-4'>
+        <p className='text-white text-3xl font-semibold '>Dashboard</p>
+        <button onClick={logout} className=" bg-[red] text-white font-semibold px-4 py-2 rounded">
+          Logout
+        </button>
+      </div>
+      <hr />
+      <div className=' text-white flex gap-20'>
+        <ul className='my-6 px-6'>
+          <li className='flex items-center gap-2 text-lg font-semibold my-3 '><CiUser className='text-white text-2xl  ' />{user.email}</li>
+          <li className='flex items-center gap-2 text-lg font-semibold my-2'><CiPassport1/>{user.userId}</li>
+          <li className='flex items-center gap-2 text-lg font-semibold my-3'><CiViewList/>WatchList</li>
+        </ul>
+
+        <div>      
+          <h2 className='text-3xl my-4 font-semibold text-center leading-relaxed text-[#fe6a13]'>Welcome to your dashboard <br /> {user.email}</h2>
+        </div>    
+      </div>
+    </>
   );
 };

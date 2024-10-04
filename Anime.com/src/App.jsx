@@ -12,9 +12,8 @@ import { Formfill } from './components/Formfill'
 import Login from './components/Login'
  import SignUp from './components/SignUp'
 import { Watchlist } from './components/Watchlist'
-
-// import { Dashboard } from './components/Dashboard'
-// import PrivateRoute from './components/Privateroute'
+import { Dashboard } from './components/Dashboard'
+import  PrivateRoute  from './components/PrivateRoute'
 
 function App() {
   const [animeData, setAnimeData] = useState([]);
@@ -43,30 +42,39 @@ function App() {
     result();
   }, []);
 
-
+  const user = localStorage.getItem('user');
   
   // if (loading) return <p>Loading...</p>; // Show loading state
   // if (error) return <p>Error: {error}</p>; // Show error message
 
+  // const [login ,setlogin]=useState(()=>{
+  //   return JSON.parse(localStorage.getItem('user'));
+  // })
+
+  // useEffect(()=>{
+  //   localStorage.setItem("user",JSON.stringify(login))
+  // },[login])
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-         <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login  />} />
+          <Route path="/signup" element={<SignUp />} />
            <Route path="*" element={<Navigate to="/login" />} /> 
-          <Route path='/home' element={<Home dataa={animeData}/> } />
-          <Route path='/animes' element={<Animes data={animeData}/>} />
+          
+          <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/login"}/>}></Route>
+          
+          <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/login"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />
           <Route path='/watchlist' element={<Watchlist data={animeData}/>} />
           <Route path='/animeinfo/name/:name/category/:category' element={<AnimeInfo data={animeData}/>} />
-           {/* <Route
+           <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Dashboard  />
             </PrivateRoute>
-          }></Route>  */}
+          }></Route> 
       </Routes>
       </BrowserRouter> 
     </>

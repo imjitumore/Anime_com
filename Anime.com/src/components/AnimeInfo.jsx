@@ -129,7 +129,7 @@ export const AnimeInfo = ({ data }) => {
         <p className="text-3xl font-semibold text-white px-4 my-3">
           Related Series:
         </p>
-        <div className=" px-3">
+        <div className=" px-1">
           <Slider {...settings}>
             {seriesCategory && seriesCategory.length > 0 ? (
               seriesCategory.slice(0, 12).map((item) => (
@@ -137,7 +137,7 @@ export const AnimeInfo = ({ data }) => {
                   to={`/animeinfo/name/${item.name}/category/${item.category}`}
                   key={item.name}
                 >
-                  <div className="px-1" onClick={scrollToTop}>
+                  <div className="" onClick={scrollToTop}>
                     <Card
                       image={item.image}
                       name={item.name}
@@ -165,7 +165,7 @@ export const AnimeInfo = ({ data }) => {
               <Link
                 to={`/animeinfo/name/${item.name}/category/${item.category}`}
               >
-                <div className="px-1" onClick={scrollToTop} >
+                <div className="" onClick={scrollToTop} >
                   <Card
                     image={item.image}
                     name={item.name}

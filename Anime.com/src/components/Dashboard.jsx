@@ -46,17 +46,17 @@ export const Dashboard = () => {
         </div>
       </div>
       <hr />
-      <div className=' text-white flex gap-20 h-full'>
-        <ul className='my-6 px-6 w-[25%] border-r-2 border-white h-full'>
-          <li className='text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer' onClick={() => setAllItems("Dashboard")}><MdOutlineDashboard className='text-white text-2xl bg-transparent' />Dashboard</li>
-          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer' onClick={() => setAllItems("watchlist")} ><CiViewList className='text-xl bg-transparent' />WatchList</li>
-          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer'onClick={() => setAllItems("Settings")} ><CiSettings className='text-2xl bg-transparent' />Settings</li>
-          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer' onClick={() => setAllItems("History")}><MdHistory className='text-2xl bg-transparent' />History</li>
+      <div className=' text-white flex  h-full'>
+        <ul className='my-6 px-6 w-[22%]  border-r-2 border-white h-full'>
+          <li className='text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full' onClick={() => setAllItems("Dashboard")}><MdOutlineDashboard className='text-white text-2xl bg-transparent' />Dashboard</li>
+          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("watchlist")} ><CiViewList className='text-xl bg-transparent' />WatchList</li>
+          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("Settings")} ><CiSettings className='text-2xl bg-transparent' />Settings</li>
+          <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("History")}><MdHistory className='text-2xl bg-transparent' />History</li>
         </ul>
-        <div>
-          {allItems == "Dashboard" ? <UserDashboard /> 
-          : allItems == "watchlist" ? <WatchList />
-          : allItems=="Settings"?<Settings/>:allItems=="History"?<History/>:""}
+        <div className='ml-6 my-6'>
+          {allItems == "Dashboard" ? <UserDashboard />
+            : allItems == "watchlist" ? <WatchList />
+              : allItems == "Settings" ? <Settings /> : allItems == "History" ? <History /> : <DefaultPage />}
         </div>
       </div>
     </>
@@ -64,22 +64,9 @@ export const Dashboard = () => {
 };
 
 function UserDashboard() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const loggedUser = localStorage.getItem('user');
-    if (loggedUser) {
-      setUser(JSON.parse(loggedUser));
-    }
-  }, []); 
-
-  if (!user) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <>
-      <h2 className='text-3xl my-4 font-semibold text-center leading-relaxed text-[#fe6a13]'>Welcome to your dashboard <br />{user.email}</h2>
-      <h2 className='flex items-center gap-2 text-lg font-semibold my-2'></h2>
+      <h2 className='flex items-center gap-2 text-lg font-semibold my-2'>DashBoard</h2>
     </>
   )
 }
@@ -96,6 +83,31 @@ function Settings() {
   return (
     <>
       <h2 className='text-3xl my-4 font-semibold text-center leading-relaxed text-[#fe6a13]'>Settings</h2>
+    </>
+  )
+}
+
+function DefaultPage() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const loggedUser = localStorage.getItem('user');
+    if (loggedUser) {
+      setUser(JSON.parse(loggedUser));
+    }
+  }, []);
+
+  if (!user) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <>
+      <h2 className='text-2xl my-4 font-semibold text-center leading-relaxed text-white'>
+        <div className='text-[30px]'><span className='text-[red]'>Thank you</span> for joining US, {user.email}! <br /></div>
+        <br />We're thrilled to have you as part of our community. <br />
+        Get ready to dive into an endless world of anime adventures. <br />
+       <p className='text-[#f00072] text-3xl my-3'> Enjoy watching and explore to your heart’s content!❤️🎥</p>
+      </h2>
     </>
   )
 }

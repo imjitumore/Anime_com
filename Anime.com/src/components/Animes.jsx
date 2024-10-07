@@ -11,6 +11,7 @@ export const Animes = ({ data }) => {
       behavior: "smooth", // Optional: Adds smooth scrolling effect
     });
   };
+
   return (
     <>
       <Navbar />

@@ -19,6 +19,7 @@ export const AnimeInfo = ({ data }) => {
     autoplaySpeed: 2000,
     arrows: false,
   };
+
   const [anime, setAnime] = useState(null);
   const [seriesCategory, setSeriesCategory] = useState(null);
   const { name } = useParams();
@@ -40,19 +41,36 @@ export const AnimeInfo = ({ data }) => {
     });
   };
 
+  
+  useEffect(() => {
+    if (anime) {
+      const userId = JSON.parse(localStorage.getItem("user"));
+      fetch(`https://anime-com-backend.onrender.com/${userId.userId}`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(anime),
+      })
+        .then((resp) => resp.json())
+        .then((data) => console.log(data));
+    }
+  }, [anime]);
+
   async function watchList() {
     console.log("function called");
-    const userId = JSON.parse(localStorage.getItem("user"))
-    console.log(userId)
+    const userId = JSON.parse(localStorage.getItem("user"));
+    console.log(userId);
     try {
-      const response = await fetch(`http://localhost:4000/api/watchlist/${userId.userId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(anime),
-      });
+      const response = await fetch(
+        `https://anime-com-backend.onrender.com/api/watchlist/${userId.userId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(anime),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to add to watchlist');
+        throw new Error("Failed to add to watchlist");
       }
 
       const result = await response.json();
@@ -66,6 +84,8 @@ export const AnimeInfo = ({ data }) => {
     setSeriesCategory(data.filter((item) => item.category === category));
   }, [data]);
   console.log(seriesCategory);
+
+  const [val, setVal] = useState(true);
   return (
     <>
       <Navbar />
@@ -73,9 +93,12 @@ export const AnimeInfo = ({ data }) => {
         "Loading"
       ) : (
         <div className="text-white group overflow-hidden h-full">
-          <img className='  w-full' src={`https://anime-com-backend.onrender.com/${anime.bgimage}`} alt={anime.image} />
+          <img
+            className="  w-full"
+            src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
+            alt={anime.image}
+          />
           <div className="flex px-10 gap-10 w-100%">
-
             <div className=" w-[70%] mt-20">
               <div className="bg-transparent">
                 <iframe
@@ -90,7 +113,20 @@ export const AnimeInfo = ({ data }) => {
               <p className="text-5xl py-5 font-semibold  w-full">
                 {anime.name}
               </p>
-              <button onClick={watchList} className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-6 border-[#f6baa1]">
+              <button
+                onClick={() => {
+                  watchList(),
+                    setVal(false),
+                    setTimeout(() => {
+                      setVal(true);
+                    }, 3000);
+                }}
+                className={`${
+                  val
+                    ? "flex bg-[#E86229] text-white font-semibold items-center gap-2 py-3 my-3 px-6 border-[#f6baa1]"
+                    : "flex bg-white text-black font-semibold items-center gap-2 py-3 my-3 px-6 border-[#f6baa1]"
+                }`}
+              >
                 <FaBookmark className="bg-transparent" />
                 Add To WatchList
               </button>
@@ -120,7 +156,11 @@ export const AnimeInfo = ({ data }) => {
               </div>
             </div>
             <div className="">
-              <img className="pt-20" src={`https://anime-com-backend.onrender.com/${anime.image}`} alt={anime.image} />
+              <img
+                className="pt-20"
+                src={`https://anime-com-backend.onrender.com/${anime.image}`}
+                alt={anime.image}
+              />
             </div>
           </div>
         </div>
@@ -154,19 +194,19 @@ export const AnimeInfo = ({ data }) => {
         </div>
       </div>
 
-      <div className="my-20" >
+      <div className="my-20">
         <div className="">
           <p className="text-3xl font-semibold text-white px-4 my-3">
             You Might Aslo Like
           </p>
         </div>
-        <div className="grid grid-cols-5" >
+        <div className="grid grid-cols-5">
           {data.slice(50, 60).map((item, i) => {
             return (
               <Link
                 to={`/animeinfo/name/${item.name}/category/${item.category}`}
               >
-                <div className="" onClick={scrollToTop} >
+                <div className="" onClick={scrollToTop}>
                   <Card
                     image={item.image}
                     name={item.name}
@@ -179,7 +219,10 @@ export const AnimeInfo = ({ data }) => {
         </div>
         <div className="flex justify-center my-4">
           <Link to={"/animes"}>
-            <button className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-8 border-[#2c1e18]" onClick={scrollToTop}>
+            <button
+              className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-8 border-[#2c1e18]"
+              onClick={scrollToTop}
+            >
               <FaPlay className="bg-transparent" />
               View All Animes
             </button>

@@ -8,7 +8,6 @@ export const Fetch = () => {
         data.map((item) => (
           <div key={item._id} className="anime-item text-white  my-5"> 
             <img className='h-[300px]' src={`http://localhost:4000/${item.image}`} alt={item.image} /> 
-            {/* <img className='h-[300px]' src={`http://localhost:4000/${item.bgimage}`} alt={item.bgimage} />  */}
             <p className='font-semibold'>{item.name}</p>
             <p>{item.rating}</p>
           </div>

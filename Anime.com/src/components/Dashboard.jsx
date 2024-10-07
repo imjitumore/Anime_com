@@ -67,11 +67,12 @@ export const Dashboard = () => {
 
 function WatchList() {
   const [watchdata, setWatchlist] = useState([])
+  
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.userId) {
-      fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
+      fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Failed to fetch watchlist');
@@ -83,7 +84,20 @@ function WatchList() {
     } else {
       console.error("User not found in localStorage");
     }
-  }, []);
+  }, [watchdata]);
+
+  function deleteAnime(name) {
+    const userId = JSON.parse(localStorage.getItem("user"))
+    fetch(`https://anime-com-backend.onrender.com/api/removeAnime/${userId.userId}/${name}`,
+      {
+        method: "DELETE",
+        headers: { "Contect-type": "application/json" },
+        body: JSON.stringify({ name })
+      }
+    ).then(response => response.json()).then(()=>{
+      fetch("https://anime-com-backend.onrender.com/api/getwatchlist").then(resp=>resp.json()).then(data=>setWatchlist(data))
+    })
+  }
 
   return (
     <>
@@ -92,18 +106,20 @@ function WatchList() {
         {watchdata.map((item, i) => {
           return (
             <>
-              <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
 
-                <div className='flex my-3 justify-between gap-2 mx-3  '>
-                  <div>
-                    <img className='text-white w-52 object-cover' src={`https://anime-com-backend.onrender.com/${item.image}`} alt={item.image} />
-                  </div>
-                  <div className='text-white  text-xl font-semibold w-full'>{item.name}</div>
-                  <div>
-                    <button className='bg-[#00f2f2] py-2 w-36  font-semibold rounded-lg text-md'>Visit Anime</button>
-                  </div>
+              <div className='flex my-3 justify-between gap-2 mx-3  '>
+                <div>
+                  <img className='text-white w-52 object-cover' src={`https://anime-com-backend.onrender.com/${item.image}`} alt={item.image} />
                 </div>
-              </Link>
+                <div className='text-white  text-xl font-semibold w-full'>{item.name}</div>
+                <div>
+                  <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
+                    <button className='bg-[#00f2f2] py-2 w-36  font-semibold rounded-lg text-md'>Visit Anime</button>
+                  </Link>
+                  <button onClick={() => deleteAnime(item.name)} className='bg-[#f00079] py-2 my-2 w-36  font-semibold rounded-lg text-md'>Remove</button>
+                </div>
+              </div>
+
             </>
           )
         })}

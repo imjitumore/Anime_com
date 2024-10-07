@@ -10,7 +10,7 @@ export const Watchlist = ({ data }) => {
             return respose.json()
         })
             .then(data => setData(data))
-    }, [watchdata])
+    }, [])
 
     console.log(data)
     return (

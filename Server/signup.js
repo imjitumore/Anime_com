@@ -6,7 +6,7 @@ app.use(express.json()
 )
 app.use(cors())
 
-const { MongoClient, CURSOR_FLAGS } = require("mongodb")
+const { MongoClient, CURSOR_FLAGS, ObjectId } = require("mongodb")
 const url = "mongodb+srv://jitendraumore99:0wy73T6HU7ahAkIL@animecom.ukiff.mongodb.net/"
 const client = new MongoClient(url)
 const dbConnection = async () => {
@@ -44,8 +44,8 @@ app.get("/api/getanimes", async (req, res) => {
 
 app.get("/api/getwatchlist", async (req, res) => {
   try {
-    const collection = await dbContact();
-    const data = await collection.find({}).toArray(); // Fetch data
+    const collection = await dbConnection();
+    const data = await collection.find({ watchlist: { $exists: true, $ne: [] } }).toArray(); 
     res.status(200).json(data); // Send data 
   } catch (error) {
     res.status(500).json({ message: "Error fetching data", error }); // Handle errors
@@ -77,10 +77,11 @@ app.post("/api/signup", async (req, res) => {
 });
 
 app.put("/api/watchlist/:id", async (req, res) => {
+  console.log(req.params.id)
   try {
     const collection = await dbConnection();
-    const data = await collection.updateOne({ _id: req.params.id }, { $set: [{ watchlist: req.body }] }); // Insert data into the collection
-    console.log("Data inserted:", data); // Optional: Log the inserted data
+    const data = await collection.updateOne({ _id: new ObjectId(req.params.id) }, { $push: { watchlist: req.body  }}); // update data into the collection
+    console.log("Data updated:", data); // Optional: Log the inserted data
     res.status(200).json({ message: "Added to watchlist" });
   } catch (error) {
     console.error("Error adding to watchlist:", error);

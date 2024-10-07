@@ -3,7 +3,7 @@ import { CiPassport1, CiSettings, CiUser, CiViewList } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import logo from "/logo.png"
 import { MdHistory, MdOutlineDashboard } from "react-icons/md";
-
+import { Link } from 'react-router-dom';
 
 export const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -56,7 +56,7 @@ export const Dashboard = () => {
         <div className='ml-6 my-6'>
           {allItems == "" ? <UserDashboard />
             : allItems == "watchlist" ? <WatchList />
-              : allItems == "Settings" ? <Settings /> : allItems == "History" ? <History /> :""}
+              : allItems == "Settings" ? <Settings /> : allItems == "History" ? <History /> : ""}
         </div>
       </div>
     </>
@@ -66,9 +66,48 @@ export const Dashboard = () => {
 
 
 function WatchList() {
+  const [watchdata, setWatchlist] = useState([])
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.userId) {
+      fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch watchlist');
+          }
+          return response.json();
+        })
+        .then((data) => setWatchlist(data))
+        .catch((error) => console.error("Error fetching watchlist:", error));
+    } else {
+      console.error("User not found in localStorage");
+    }
+  }, []);
+
   return (
     <>
-      <h2 className='text-3xl my-4 font-semibold text-center leading-relaxed text-[#fe6a13]'>WatchList</h2>
+      <div className='text-3xl font-semibold text-white text-center '>MY Watch List</div>
+      <div className=' py-8 grid grid-cols-2 '>
+        {watchdata.map((item, i) => {
+          return (
+            <>
+              <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
+
+                <div className='flex my-3 justify-between gap-2 mx-3  '>
+                  <div>
+                    <img className='text-white w-52 object-cover' src={`https://anime-com-backend.onrender.com/${item.image}`} alt={item.image} />
+                  </div>
+                  <div className='text-white  text-xl font-semibold w-full'>{item.name}</div>
+                  <div>
+                    <button className='bg-[#00f2f2] py-2 w-36  font-semibold rounded-lg text-md'>Visit Anime</button>
+                  </div>
+                </div>
+              </Link>
+            </>
+          )
+        })}
+      </div>
     </>
   )
 }
@@ -100,7 +139,7 @@ function UserDashboard() {
         <div className='text-[30px]'><span className='text-[red]'>Thank you</span> for joining US, {user.email}! <br /></div>
         <br />We're thrilled to have you as part of our community. <br />
         Get ready to dive into an endless world of anime adventures. <br />
-       <p className='text-[#f00072] text-3xl my-3'> Enjoy watching and explore to your heart’s content!❤️🎥</p>
+        <p className='text-[#f00072] text-3xl my-3'> Enjoy watching and explore to your heart’s content!❤️🎥</p>
       </h2>
     </>
   )

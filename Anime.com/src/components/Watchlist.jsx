@@ -4,14 +4,24 @@ import { Link } from 'react-router-dom'
 
 export const Watchlist = ({ data }) => {
 
-    const [watchdata, setData] = useState([])
+    const [watchdata,setWatchlist]= useState([])
     useEffect(() => {
-        const userId = JSON.parse(localStorage.getItem("user"))
-        fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${userId.userId}`).then(respose => {
-            return respose.json()
-        })
-            .then(data => setData(data))
-    }, [])
+        const user = JSON.parse(localStorage.getItem("user"));
+        
+        if (user && user.userId) {
+          fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Failed to fetch watchlist');
+              }
+              return response.json();
+            })
+            .then((data) => setWatchlist(data))
+            .catch((error) => console.error("Error fetching watchlist:", error));
+        } else {
+          console.error("User not found in localStorage");
+        }
+      }, []); 
 
     console.log(data)
     return (

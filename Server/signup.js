@@ -42,16 +42,25 @@ app.get("/api/getanimes", async (req, res) => {
   }
 })
 
-app.get("/api/getwatchlist:/:id", async (req, res) => {
+
+app.get("/api/getwatchlist/:id", async (req, res) => {
   try {
     const collection = await dbConnection();
-    const userId = req.params.id; 
-    const user = await collection.findOne({ _id: ObjectId(userId) });
+    const userId = req.params.id;
+
+    const user = await collection.findOne({ _id: new ObjectId(userId) });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     res.status(200).json(user.watchlist || []);
   } catch (error) {
+    console.error("Error fetching user watchlist:", error); // Log the error
     res.status(500).json({ message: "Error fetching data", error }); // Handle errors
   }
-})
+});
+
 
 app.post("/api/signup", async (req, res) => {
   const { email, password } = req.body;

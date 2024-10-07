@@ -48,28 +48,22 @@ export const Dashboard = () => {
       <hr />
       <div className=' text-white flex  h-full'>
         <ul className='my-6 px-6 w-[22%]  border-r-2 border-white h-full'>
-          <li className='text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full' onClick={() => setAllItems("Dashboard")}><MdOutlineDashboard className='text-white text-2xl bg-transparent' />Dashboard</li>
+          <li className='text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full' onClick={() => setAllItems("")}><MdOutlineDashboard className='text-white text-2xl bg-transparent' />Dashboard</li>
           <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("watchlist")} ><CiViewList className='text-xl bg-transparent' />WatchList</li>
           <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("Settings")} ><CiSettings className='text-2xl bg-transparent' />Settings</li>
           <li className='flex items-center gap-3 text-lg font-semibold my-4 py-3 px-6 bg-[#727272] rounded-lg cursor-pointer w-full' onClick={() => setAllItems("History")}><MdHistory className='text-2xl bg-transparent' />History</li>
         </ul>
         <div className='ml-6 my-6'>
-          {allItems == "Dashboard" ? <UserDashboard />
+          {allItems == "" ? <UserDashboard />
             : allItems == "watchlist" ? <WatchList />
-              : allItems == "Settings" ? <Settings /> : allItems == "History" ? <History /> : <DefaultPage />}
+              : allItems == "Settings" ? <Settings /> : allItems == "History" ? <History /> :""}
         </div>
       </div>
     </>
   );
 };
 
-function UserDashboard() {
-  return (
-    <>
-      <h2 className='flex items-center gap-2 text-lg font-semibold my-2'>DashBoard</h2>
-    </>
-  )
-}
+
 
 function WatchList() {
   return (
@@ -87,7 +81,7 @@ function Settings() {
   )
 }
 
-function DefaultPage() {
+function UserDashboard() {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const loggedUser = localStorage.getItem('user');

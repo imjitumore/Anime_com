@@ -42,10 +42,10 @@ export const AnimeInfo = ({ data }) => {
 
   async function watchList() {
     console.log("function called");
-
+    const userId = JSON.parse(localStorage.getItem("user"))
     try {
-      const response = await fetch('https://anime-com-backend.onrender.com/api/watchlist', {
-        method: 'POST',
+      const response = await fetch(`https://anime-com-backend.onrender.com/api/watchlist/${userId._id}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(anime),
       });

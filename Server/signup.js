@@ -42,11 +42,12 @@ app.get("/api/getanimes", async (req, res) => {
   }
 })
 
-app.get("/api/getwatchlist", async (req, res) => {
+app.get("/api/getwatchlist:/:id", async (req, res) => {
   try {
     const collection = await dbConnection();
-    const data = await collection.find({ watchlist: { $exists: true, $ne: [] } }).toArray(); 
-    res.status(200).json(data); // Send data 
+    const userId = req.params.id; 
+    const user = await collection.findOne({ _id: ObjectId(userId) });
+    res.status(200).json(user.watchlist || []);
   } catch (error) {
     res.status(500).json({ message: "Error fetching data", error }); // Handle errors
   }

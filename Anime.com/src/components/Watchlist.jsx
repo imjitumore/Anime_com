@@ -6,7 +6,8 @@ export const Watchlist = ({ data }) => {
 
     const [watchdata, setData] = useState([])
     useEffect(() => {
-        fetch("https://anime-com-backend.onrender.com/api/getwatchlist").then(respose => {
+        const userId = JSON.parse(localStorage.getItem("user"))
+        fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${userId.userId}`).then(respose => {
             return respose.json()
         })
             .then(data => setData(data))

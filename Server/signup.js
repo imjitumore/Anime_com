@@ -78,7 +78,7 @@ app.post("/api/signup", async (req, res) => {
 
 app.put("/api/watchlist/:id", async (req, res) => {
   try {
-    const collection = await dbContact();
+    const collection = await dbConnection();
     const data = await collection.updateOne({ _id: req.params.id }, { $set: [{ watchlist: req.body }] }); // Insert data into the collection
     console.log("Data inserted:", data); // Optional: Log the inserted data
     res.status(200).json({ message: "Added to watchlist" });

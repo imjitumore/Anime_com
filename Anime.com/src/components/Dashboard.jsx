@@ -37,7 +37,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-5 pr-8 my-3">
+      <div className="flex justify-between items-center px-5 pr-8 py-4 z-10 fixed w-full">
         <div>
           <Link to={"/home"}>
             <img className="w-40" src={logo} alt="" />
@@ -57,10 +57,10 @@ export const Dashboard = () => {
         </div>
       </div>
       <hr />
-      <div className=" text-white flex  h-full">
-        <ul className="my-6 px-6 w-[22%]  border-r-2 border-white h-full">
+      <div className=" text-white flex  h-full bg-black">
+        <ul className="py-6 px-6 w-[22%]  border-r border-white h-full fixed ">
           <li
-            className="text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full"
+            className="text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full mt-20"
             onClick={() => setAllItems("")}
           >
             <MdOutlineDashboard className="text-white text-2xl bg-transparent" />
@@ -89,7 +89,7 @@ export const Dashboard = () => {
           </li>
           
         </ul>
-        <div className="ml-6 my-6">
+        <div className="ml-6 my-20 pl-[22%]">
           {allItems == "" ? (
             <UserDashboard />
           ) : allItems == "watchlist" ? (
@@ -97,7 +97,7 @@ export const Dashboard = () => {
           ) : allItems == "Settings" ? (
             <Settings />
           ) : allItems == "History" ? (
-            <History />
+            <History/>
           ) : (
             ""
           )}
@@ -216,9 +216,9 @@ function UserDashboard() {
   }
 
   return (
-    <>
+    <div className="w-full">
       <h2 className="text-2xl my-4 font-semibold text-center leading-relaxed text-white">
-        <div className="text-[30px]">
+        <div className="text-3xl">
           <span className="text-[red]">Thank you</span> for joining US,{" "}
           {user.email}! <br />
         </div>
@@ -230,7 +230,7 @@ function UserDashboard() {
           Enjoy watching and explore to your heart’s content!❤️🎥
         </p>
       </h2>
-    </>
+    </div>
   );
 }
 
@@ -253,6 +253,9 @@ function History() {
       <div className="grid grid-cols-4">
         {data.map((item) => {
           return (
+            <Link
+                    to={`/animeinfo/name/${item.name}/category/${item.category}`}
+                  >
             <div className="  h-full my-3">
               <img
                 className="py-2 px-4"
@@ -262,6 +265,7 @@ function History() {
               <p className="text-xl font-semibold px-4 my-1">{item.name}</p>
               <p className="text-md px-4">{item.language}</p>
             </div>
+            </Link>
           );
         })}
       </div>

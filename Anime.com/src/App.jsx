@@ -15,6 +15,7 @@ import { Watchlist } from './components/Watchlist'
 import { Dashboard } from './components/Dashboard'
 import  PrivateRoute  from './components/PrivateRoute'
 import ChangePassword from './components/ChangePassword'
+import { Search } from './components/Search'
 
 function App() {
   const [animeData, setAnimeData] = useState([]);
@@ -52,9 +53,6 @@ function App() {
   //   return JSON.parse(localStorage.getItem('user'));
   // })
 
-  // useEffect(()=>{
-  //   localStorage.setItem("user",JSON.stringify(login))
-  // },[login])
   return (
     <>
       <BrowserRouter>
@@ -66,13 +64,14 @@ function App() {
           <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/login"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />
           <Route path='/changePass' element={<ChangePassword/>} />
+          <Route path='/search' element={<Search/>} />
           <Route path='/watchlist' element={<Watchlist data={animeData}/>} />
           <Route path='/animeinfo/name/:name/category/:category' element={<AnimeInfo data={animeData}/>} />
            <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard  />
+              <Dashboard data={animeData}  />
             </PrivateRoute>
           }></Route> 
       </Routes>

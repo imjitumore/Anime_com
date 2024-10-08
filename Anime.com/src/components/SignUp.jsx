@@ -46,17 +46,16 @@ const SignUp = () => {
       <Navbar2 />
       <div className="flex  justify-center">
         <div className="w-80">
-
         </div>
-        <div className="text-white border-2 py-6 px-8 my-4 font-semibold">
+        <div className="text-white  px-8 font-semibold">
           <div className="">
-            <h2 className="text-3xl font-semibold text-center my-4">Create Account</h2>
+            <h2 className="text-3xl font-semibold text-center my-4">Create New Account</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
               <div className="my-3">
-                <label className="text-sm font-semibold">Email:</label><br />
+                <label className="text-sm font-semibold py-2">Email:</label><br />
                 <input
-                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  className="border-2 rounded-lg py-3 px-3  font-semibold w-full my-2"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -67,7 +66,7 @@ const SignUp = () => {
               <div className="my-3">
                 <label className="text-sm font-semibold">Password:</label><br />
                 <input
-                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  className="border-2 rounded-lg py-3 px-3  font-semibold w-full my-2"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -76,9 +75,9 @@ const SignUp = () => {
                 />
               </div>
               <div className="my-2 ">
-                <label className="text-sm font-semibold">Confirm Password:</label><br />
+                <label className="text-sm font-semibold py-2">Confirm Password:</label><br />
                 <input
-                  className="border-2 rounded-lg py-2 px-2 font-light w-full"
+                  className="border-2 rounded-lg py-3 my-2 px-3  font-semibold w-full"
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -87,7 +86,7 @@ const SignUp = () => {
                 />
               </div>
               <div className="">
-                <button className="border-2 py-2 px-12 rounded-md bg-[#fc5d00] my-4 border-none text-center w-full" type="submit">Sign Up</button>
+                <button className="border-3 py-2 px-12 rounded-md border-[#fc5d00] bg-[#fc5d00] my-4 border-none text-center w-full" type="submit">Sign Up</button>
               </div>
             </form>
           </div>
@@ -101,14 +100,6 @@ const SignUp = () => {
 };
 
 
-function SignPage() {
 
-
-  return (
-    <>
-
-    </>
-  )
-}
 
 export default SignUp;

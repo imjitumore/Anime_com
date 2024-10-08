@@ -15,6 +15,7 @@ import { Watchlist } from './components/Watchlist'
 import { Dashboard } from './components/Dashboard'
 import  PrivateRoute  from './components/PrivateRoute'
 import { Search } from './components/Search'
+import { Main } from './components/Main'
 
 function App() {
   const [animeData, setAnimeData] = useState([]);
@@ -57,10 +58,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login  />} />
+          <Route path="/main" element={<Main  />} />
           <Route path="/signup" element={<SignUp />} />
-           <Route path="*" element={<Navigate to="/login" />} /> 
-          <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/login"}/>}></Route>
-          <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/login"}/>} />
+           <Route path="*" element={<Navigate to="/main" />} /> 
+          <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/main"}/>}></Route>
+          <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/main"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />
           <Route path='/search' element={<Search/>} />
           <Route path='/watchlist' element={<Watchlist data={animeData}/>} />

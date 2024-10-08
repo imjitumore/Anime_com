@@ -47,15 +47,15 @@ const Login = () => {
         <div className="">
             <img className="h-[400px]" src={login} alt="" />
         </div>
-        <div className="text-white border-2 py-4 px-8 my-4 font-semibold">
-          <div className="">
-            <h2 className="text-3xl font-semibold text-center my-6">Log In</h2>
+        <div className="text-white px-8  font-semibold">
+          <div className="w-[110%]">
+            <h2 className="text-3xl font-semibold text-center my-3">Log In</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
-              <div className="text-white my-2">
+              <div className="text-white my-2 w-full">
                 <label className="text-sm ">Email </label><br />
                 <input
-                  className="border-2 rounded-lg py-2 px-2 w-full  font-light"
+                  className="border-2 rounded-lg py-3 my-2 px-3 w-full  font-semibold  "
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +66,7 @@ const Login = () => {
               <div className="text-white my-6">
                 <label className="font-semibold text-sm">Password </label><br />
                 <input
-                  className="border-2 rounded-lg py-2 px-2"
+                  className="border-2 rounded-lg py-3 px-3 my-2 w-full"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "/logo.png";
 import { MdHistory, MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
+import {toast,ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -283,9 +285,18 @@ function ChangePassword() {
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
-
+   
     if (newPassword !== confirmPassword) {
-      alert("New passwords do not match.")
+      toast.error("New Password does not match",{
+        position:"top-center",
+        autoClose:2000,
+        hideProgressBar:false,
+        closeOnClick:true,
+        pauseOnHover:true,
+        draggable:true,
+        progress:undefined,
+        theme:"light"
+      })
       return;
     }
 
@@ -309,6 +320,7 @@ function ChangePassword() {
 
   return (
     <>
+    <ToastContainer/>
     <div className="password-change-form text-white">
       <div className="text-3xl font-semibold text-white mx-2  my-5">
         Change Your Password

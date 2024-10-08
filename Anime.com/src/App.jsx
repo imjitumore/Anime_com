@@ -14,7 +14,6 @@ import Login from './components/Login'
 import { Watchlist } from './components/Watchlist'
 import { Dashboard } from './components/Dashboard'
 import  PrivateRoute  from './components/PrivateRoute'
-import ChangePassword from './components/ChangePassword'
 import { Search } from './components/Search'
 
 function App() {
@@ -63,7 +62,6 @@ function App() {
           <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/login"}/>}></Route>
           <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/login"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />
-          <Route path='/changePass' element={<ChangePassword/>} />
           <Route path='/search' element={<Search/>} />
           <Route path='/watchlist' element={<Watchlist data={animeData}/>} />
           <Route path='/animeinfo/name/:name/category/:category' element={<AnimeInfo data={animeData}/>} />

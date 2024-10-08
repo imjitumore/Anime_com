@@ -95,7 +95,7 @@ export const Dashboard = () => {
           ) : allItems == "watchlist" ? (
             <WatchList />
           ) : allItems == "Settings" ? (
-            <Settings />
+            <ChangePassword/>
           ) : allItems == "History" ? (
             <History/>
           ) : (
@@ -269,6 +269,93 @@ function History() {
           );
         })}
       </div>
+    </>
+  );
+}
+
+function ChangePassword() {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
+
+  const userId = JSON.parse(localStorage.getItem("user")).userId;
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      alert("New passwords do not match.")
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://anime-com-backend.onrender.com/api/changepassword/${userId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to change password.');
+      }
+      alert("Password changed successfully.")
+    } catch (error) {
+      alert(error.message)
+    }
+  };
+
+  return (
+    <>
+    <div className="password-change-form text-white">
+      <div className="text-3xl font-semibold text-white mx-2  my-5">
+        Change Your Password
+      </div>
+      <form className="px-3" onSubmit={handlePasswordChange}>
+        <div className="my-5">
+          <label className="text-lg font-semibold  ">Current Password:</label>
+          <br />
+          <input 
+          className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
+            type="password" 
+            value={currentPassword} 
+            onChange={(e) => setCurrentPassword(e.target.value)} 
+            required
+            placeholder="Enter Current Password"
+          />
+        </div>
+        <div>
+          <label className="text-lg font-semibold ">New Password</label><br />  
+          <input 
+            className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
+            type="password" 
+            value={newPassword} 
+            onChange={(e) => setNewPassword(e.target.value)} 
+            required
+            placeholder="Enter New Password"
+          />
+        </div>
+        <div className="my-5">
+          <label className="text-lg font-semibold">Confirm New Password:</label>
+          <br />
+          <input 
+            className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
+            type="password" 
+            value={confirmPassword} 
+            onChange={(e) => setConfirmPassword(e.target.value)} 
+            required
+            placeholder="Please Confirm New Password"
+          />
+        </div>
+        <button
+          type="submit"
+            className=" bg-[#f00072] text-white font-semibold px-4 py-2 rounded">
+            Change Password
+          </button>
+      </form>
+    </div>
     </>
   );
 }

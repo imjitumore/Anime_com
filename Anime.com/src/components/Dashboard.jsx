@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiPassport1, CiSettings, CiUser, CiViewList } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import logo from "/logo.png";
+import admin from "/programmer.png";
 import { MdHistory, MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {toast,ToastContainer} from "react-toastify"
@@ -59,10 +60,14 @@ export const Dashboard = () => {
         </div>
       </div>
       <hr />
-      <div className=" text-white flex  h-full bg-black">
-        <ul className="py-6 px-6 w-[22%]  border-r border-white h-full fixed ">
+      <div className=" text-white flex  h-full">
+        <ul className="py-24 px-6 w-[22%]  border-white h-full fixed  bg-[#232323]">
+          <div className="flex justify-center bg-transparent">
+           <img className="h-28 rounded-full border-2 px-5 py-5 bg-transparent" src={admin} alt="" />
+          </div>
+          <p className="text-center font-semibold text-xl my-2 bg-transparent">{user.email}</p>
           <li
-            className="text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full mt-20"
+            className="text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full mt-5"
             onClick={() => setAllItems("")}
           >
             <MdOutlineDashboard className="text-white text-2xl bg-transparent" />

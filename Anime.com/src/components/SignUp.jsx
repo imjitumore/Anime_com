@@ -28,7 +28,7 @@ const SignUp = () => {
       });
 
       if (response.ok) {
-        navigate("login")
+        navigate("/login")
         setError("Account is created..!")
         setEmail("")
         setPassword("")

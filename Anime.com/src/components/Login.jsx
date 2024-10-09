@@ -14,7 +14,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
+
+    
     try {
       const response = await fetch('https://anime-com-backend.onrender.com/api/login', {
         method: 'POST',
@@ -29,7 +30,7 @@ const Login = () => {
       } else {
         // Store user data or token in localStorage
         localStorage.setItem('user', JSON.stringify(data)); // Store the entire user object or token
-        setSuccess('Login successful!');
+        alert('Login successful!');
         // Redirect to Home
         navigate('/home');
       }

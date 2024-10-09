@@ -65,7 +65,10 @@ export const Dashboard = () => {
           <div className="flex justify-center bg-transparent">
            <img className="h-28 rounded-full border-2 px-5 py-5 bg-transparent" src={admin} alt="" />
           </div>
-          <p className="text-center font-semibold text-xl my-2 bg-transparent">{user.email}</p>
+          <p className="text-xl text-white font-semibold flex items-center gap-2">
+            
+            {user.email.toUpperCase().replace("@GMAIL.COM", "")}
+          </p>
           <li
             className="text-white flex items-center gap-2 text-xl font-semibold  py-3 px-6 bg-[#727272] rounded-lg  cursor-pointer w-full mt-5"
             onClick={() => setAllItems("")}

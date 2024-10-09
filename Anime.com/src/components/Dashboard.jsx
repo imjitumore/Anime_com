@@ -65,7 +65,7 @@ export const Dashboard = () => {
           <div className="flex justify-center bg-transparent">
            <img className="h-28 rounded-full border-2 px-5 py-5 bg-transparent" src={admin} alt="" />
           </div>
-          <p className="text-xl text-white font-semibold flex items-center gap-2 bg-transparent my-2">
+          <p className="text-xl text-center text-white font-semibold flex items-center justify-center gap-2 bg-transparent my-2">
             {user.email.toUpperCase().replace("@GMAIL.COM", "")}
           </p>
           <li

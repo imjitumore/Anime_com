@@ -2,13 +2,13 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 
-app.use(express.json()
-)
+app.use(express.json())
 app.use(cors())
 
 const { MongoClient, CURSOR_FLAGS, ObjectId } = require("mongodb")
 const url = "mongodb+srv://jitendraumore99:0wy73T6HU7ahAkIL@animecom.ukiff.mongodb.net/"
 const client = new MongoClient(url)
+
 const dbConnection = async () => {
   const result = await client.connect()
   const db = result.db("MongoDb")
@@ -26,11 +26,6 @@ const dbConnect = async () => {
   return db.collection("Anime_com")
 }
 
-const dbContact = async () => {
-  const result = await client.connect()
-  const db = result.db("MongoDb")
-  return db.collection("watchlists")
-}
 
 app.get("/api/getanimes", async (req, res) => {
   try {
@@ -305,6 +300,28 @@ app.get("/api/getUsers", async (req, res) => {
   }
 
 });
+
+app.put('/api/updateAnime/:name', async (req, res) => {
+  try {
+    const collection = await dbConnect()
+    const animeName = req.params.name
+    const updatedData = req.body;
+    console.log(updatedData,animeName)
+
+    // Find the anime by ID and update
+    const anime = await collection.updateOne({name:animeName},{$set:(updatedData)});
+    console.log(anime)
+    if (!anime) {
+      return res.status(404).json({ message: 'Anime not found' });
+    }
+
+    res.status(200).json({message:"Update Successfully..!"});
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating anime', error });
+  }
+});
+
+
 
 
 app.listen(4000, () => {

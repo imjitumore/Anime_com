@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaBookmark } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
@@ -104,22 +104,63 @@ export const AnimeDetails = ({ data }) => {
           </button>
         </div>
 
-        <div ref={formRef}>{state ? <UpdateForm  anime={anime}/> : ""}</div>
+        <div ref={formRef}>{state ? <UpdateForm anime={anime} /> : ""}</div>
       </div>
     </>
   );
 };
 
-function UpdateForm({anime}) {
+function UpdateForm({ anime }) {
+  const [name, setName] = useState(anime.name);
+  const [summary, setSummary] = useState(anime.summary);
+  const [rating, setRating] = useState(anime.rating);
+  const [language, setLanguage] = useState(anime.language);
+  const [seasons, setSeasons] = useState(anime.seasons);
+  const [episodes, setEpisodes] = useState(anime.episodes);
+  const [year, setyear] = useState(anime.releaseyear);
+  const [duration, setduration] = useState(anime.duration);
+  const [youtube, setYoutube] = useState(anime.youtube);
+  const [stars, setStars] = useState(anime.stars);
 
-    const [name,setName] = useState(anime.name)
-    const [summary,setSummary] = useState(anime.summary)
-    const [rating,setRating] = useState(anime.rating)
-    const [language,setLanguage] = useState(anime.language)
-    const [seasons,setSeasons] = useState(anime.seasons)
-    const [episodes,setEpisodes] = useState(anime.episodes)
-    const [year,setyear] = useState(anime.year)
-    const [duration,setduration] = useState(anime.duration)
+  function updateFields() {
+    const update = async () => {
+      const response = await fetch(
+        `http://localhost:4000/api/updateAnime/${anime.name}`,
+        {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            rating: rating,
+            language: language,
+            seasons: seasons,
+            episodes: episodes,
+            releaseyear: year,
+            duration: duration,
+            youtube: youtube,
+            stars: stars,
+            summary: summary,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    };
+    update();
+  }
+
+  function clearTextBox() {
+    setName("");
+    setRating("");
+    setEpisodes("");
+    setLanguage("");
+    setSeasons("");
+    setStars("");
+    setSummary("");
+    setYoutube("");
+    setduration("");
+    setyear("");
+  }
   return (
     <>
       <div className="border-y-2 py-10">
@@ -129,12 +170,14 @@ function UpdateForm({anime}) {
           </p>
           <div className="bg-transparent py-2">
             <button
+              onClick={updateFields}
               className="py-2  bg-[#20b620] font-semibold text-white  rounded-md w-48 mx-2 my-3  bg-transparent "
               type="submit"
             >
               Update Details
             </button>
             <button
+              onClick={clearTextBox}
               className="py-2  bg-[red] font-semibold text-white  rounded-md w-48 mx-4 my-3  "
               type="submit"
             >
@@ -156,7 +199,7 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Anime Name"
                 value={name}
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <br />
               <p className="bg-transparent text-lg font-semibold my-2">
@@ -168,7 +211,7 @@ function UpdateForm({anime}) {
                 name=""
                 id=""
                 value={summary}
-                onChange={(e)=>setSummary(e.target.value)}
+                onChange={(e) => setSummary(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -198,7 +241,7 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Rating"
                 value={rating}
-                onChange={(e)=>setRating(e.target.value)}
+                onChange={(e) => setRating(e.target.value)}
               />
             </div>
             <div className="bg-transparent w-full">
@@ -210,9 +253,20 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Language"
                 value={language}
-                onChange={(e)=>setLanguage(e.target.value)}
+                onChange={(e) => setLanguage(e.target.value)}
               />
             </div>
+            <div className="bg-transparent w-full">
+              <p className="text-lg font-semibold bg-transparent mb-3">Stars</p>
+              <input
+                className="bg-transparent border-2 py-2 px-3 w-full rounded-md  font-semibold"
+                type="text"
+                placeholder="Enter Language"
+                value={stars}
+                onChange={(e) => setStars(e.target.value)}
+              />
+            </div>
+
             <div className="bg-transparent w-full">
               <p className="text-lg font-semibold bg-transparent mb-3">
                 Seasons
@@ -222,7 +276,7 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Seasons"
                 value={seasons}
-                onChange={(e)=>setSeasons(e.target.value)}
+                onChange={(e) => setSeasons(e.target.value)}
               />
             </div>
           </div>
@@ -236,7 +290,7 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Episodes"
                 value={episodes}
-                onChange={(e)=>setEpisodes(e.target.value)}
+                onChange={(e) => setEpisodes(e.target.value)}
               />
             </div>
             <div className="bg-transparent w-full">
@@ -248,7 +302,7 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Release Year"
                 value={year}
-                onChange={(e)=>setyear(e.target.value)}
+                onChange={(e) => setyear(e.target.value)}
               />
             </div>
             <div className="bg-transparent w-full">
@@ -260,7 +314,19 @@ function UpdateForm({anime}) {
                 type="text"
                 placeholder="Enter Duration"
                 value={duration}
-                onChange={(e)=>setduration(e.target.value)}
+                onChange={(e) => setduration(e.target.value)}
+              />
+            </div>
+            <div className="bg-transparent w-full">
+              <p className="text-lg font-semibold bg-transparent mb-3">
+                Video Link
+              </p>
+              <input
+                className="bg-transparent border-2 py-2 px-3 w-full rounded-md  font-semibold"
+                type="text"
+                placeholder="Enter Duration"
+                value={youtube}
+                onChange={(e) => setYoutube(e.target.value)}
               />
             </div>
           </div>

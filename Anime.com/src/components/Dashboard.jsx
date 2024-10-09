@@ -202,15 +202,6 @@ function WatchList() {
   );
 }
 
-function Settings() {
-  return (
-    <>
-      <h2 className="text-3xl my-4 font-semibold text-center leading-relaxed text-[#fe6a13]">
-        Settings
-      </h2>
-    </>
-  );
-}
 
 function UserDashboard() {
   const [user, setUser] = useState(null);
@@ -246,11 +237,11 @@ function UserDashboard() {
 
 function History() {
   const [data, setData] = useState([]);
-  const userId = JSON.parse(localStorage.getItem("user")).userId;
+  const userId = JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
     // Fetch user history only once after component mount
-    fetch(`https://anime-com-backend.onrender.com/api/gethistory/${userId}`)
+    fetch(`https://anime-com-backend.onrender.com/api/gethistory/${userId.userId}`)
       .then((resp) => resp.json())
       .then((historyData) => setData(historyData)) // Set the history data
       .catch((error) => console.error("Error fetching history:", error)); // Handle any fetch errors

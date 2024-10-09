@@ -44,8 +44,8 @@ export const AnimeInfo = ({ data }) => {
   
   useEffect(() => {
     if (anime) {
-      const userId = JSON.parse(localStorage.getItem("user"));
-      fetch(`https://anime-com-backend.onrender.com/${userId.userId}`, {
+      const userId = JSON.parse(localStorage.getItem("user"))
+      fetch(`https://anime-com-backend.onrender.com/api/history/${userId.userId}`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(anime),

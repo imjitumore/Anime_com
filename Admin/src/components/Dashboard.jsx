@@ -3,8 +3,10 @@ import logo from "/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSettings, CiUser } from "react-icons/ci";
 import { FaUsers } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import user from "/programmer.png";
+import { Navbar } from "./Navbar";
 
 export const Dashboard = ({ data }) => {
   const [admin, setAdmin] = useState(() => {
@@ -38,23 +40,7 @@ export const Dashboard = ({ data }) => {
   if (loading) return <p>Loading...</p>;
   return (
     <>
-      <div className="flex justify-between py-3 px-6 w-full fixed">
-        <div>
-          <img className="h-14" src={logo} alt="" />
-        </div>
-        <div className="flex items-center gap-3 font-semibold">
-          <p className="text-2xl text-white flex items-center gap-3">
-            <CiUser />
-            {admin.fname} {admin.lname}
-          </p>
-          <button
-            className=" bg-[red] text-white font-semibold px-4 py-2 rounded"
-            onClick={logout}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+      <Navbar/>
       <div className="text-white w-[22%] mx-6 rounded-2xl fixed my-20 h-full py-10 bg-[#232323]">
         <div className="flex justify-center bg-transparent">
           <img
@@ -189,8 +175,15 @@ function Animes({ animeData }) {
   return (
     <>
       <div className=" rounded-2xl px-10  pb-10">
-        <div className="text-white text-3xl pt-20 font-semibold bg-transparent rounded-2xl ">
-          Anime Series
+        <div className="flex justify-between w-full items-center">
+          <div className="text-white text-3xl pt-24 font-semibold bg-transparent rounded-2xl ">
+            Anime Series
+          </div>
+          <div className="pt-24">
+            <Link to={"/addAnime"}><button className=" bg-[#f00072] text-white font-semibold px-4 py-3 rounded flex gap-2 items-center">
+              <FaPlus className="bg-transparent"/>Add New Anime
+            </button></Link>
+          </div>
         </div>
         <div className="grid grid-cols-5 my-4">
           {animeData.map((item) => {

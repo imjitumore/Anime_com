@@ -5,6 +5,7 @@ import { Signup } from './components/Signup'
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom"
 import { Dashboard } from './components/Dashboard'
 import { AnimeDetails } from './components/AnimeDetails'
+import { AddAnime } from './components/AddAnime'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} /> 
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<Signup/>} />
+          <Route path='/addAnime' element={<AddAnime/>} />
           <Route path='/dashboard' element={<Dashboard data={animeAata}/>} />
           <Route path='/animeDetails/name/:name' element={<AnimeDetails data={animeAata}/>} />
         </Routes>

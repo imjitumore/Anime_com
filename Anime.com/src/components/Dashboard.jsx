@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiPassport1, CiSettings, CiUser, CiViewList } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import logo from "/logo.png";
-import admin from "/programmer.png";
+import admin from "/add-user.png";
 import { MdHistory, MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {toast,ToastContainer} from "react-toastify"
@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState("");
   const navigate = useNavigate();
-
+  const [file,setFile] = useState(null)
   useEffect(() => {
     const loggedUser = localStorage.getItem("user");
 
@@ -28,7 +28,7 @@ export const Dashboard = () => {
       navigate("/login");
     }
     setLoading(false); // set loading to false after checking
-  }, [navigate]);
+  }, [user,navigate]);
 
   //const username = user.email
   //console.log(username)
@@ -37,6 +37,39 @@ export const Dashboard = () => {
     navigate("/login"); // Redirect to the login page
   };
   if (loading) return <p>Loading...</p>;
+
+
+
+  const handleFileChange = async (e) => {
+   const selectedFile = e.target.files[0];
+   e.preventDefault();
+  
+    // Create a new FormData object
+    const formData = new FormData();
+    formData.append('profile', selectedFile); // Append the selected file
+  
+    try {
+      // Send the file via a POST request using fetch
+      const response = await fetch(`http://localhost:4000/api/profile/${user.userId}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          // No need to set Content-Type when using FormData with fetch
+        },
+      });
+  
+      // Check if the response is OK
+      if (!response.ok) {
+        throw new Error('Error uploading file');
+      }
+  
+      const data = await response.json();
+      console.log('File uploaded successfully:', data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+  
 
   return (
     <>
@@ -63,7 +96,10 @@ export const Dashboard = () => {
       <div className=" text-white flex  h-full">
         <ul className="py-24 px-6 w-[22%]  border-white h-full fixed  bg-[#232323]">
           <div className="flex justify-center bg-transparent">
-           <img className="h-28 rounded-full border-2 px-5 py-5 bg-transparent" src={admin} alt="" />
+           <label className="bg-transparent" htmlFor="profile">
+           <img className={user.profileImage?"h-28 my-2 bg-transparent rounded-full":"h-28 my-2  bg-transparent"} src={user.profileImage?`http://localhost:4000/${user.profileImage}`:admin} alt="" />
+           </label>
+           <input type="file" hidden id="profile" onChange={handleFileChange}/>
           </div>
           <p className="text-xl text-center text-white font-semibold flex items-center justify-center gap-2 bg-transparent my-2">
             {user.email.toUpperCase().replace("@GMAIL.COM", "")}

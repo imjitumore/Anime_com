@@ -124,7 +124,7 @@ function DashBoardd() {
   return (
     <>
       <div className="text-white pt-20">
-        <p className="text-white text-4xl font-semibold ">
+        <p className="text-white text-4xl font-semibold  px-2">
           Welcome {admin.fname} Sir.
         </p>
       </div>

@@ -18,7 +18,7 @@ function App() {
   const [animeData, setAnimeData] = useState([]);
   const [error, setError] = useState(null); // Added state for error handling
   // const [loading, setLoading] = useState(true); // Added state for loading status
-
+  const [user,setUser]=useState("")
   const result = async () => {
     try {
       const resp = await fetch("https://anime-com-backend.onrender.com/api/getanimes", {
@@ -39,9 +39,10 @@ function App() {
 
   useEffect(() => {
     result();
-  }, []);
+    setUser(localStorage.getItem('user'))
+  }, [user]);
 
-  const user = localStorage.getItem('user');
+  
   
   // if (loading) return <p>Loading...</p>; // Show loading state
   // if (error) return <p>Error: {error}</p>; // Show error message

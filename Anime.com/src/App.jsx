@@ -52,27 +52,30 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login  />} />
-          <Route path="/" element={<Main  />} />
-          <Route path="/signup" element={<SignUp />} />
-          {/* <Route path="" element={!user?<Navigate to="/main" />:<Navigate to={"/home"}/>} />  */}
-          <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/main"}/>}></Route>
-          <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/main"}/>} />
-          <Route path='/card' element={<Animes data={animeData}/>} />
-          <Route path='/search' element={<Search/>} />
-          <Route path='/watchlist' element={<Watchlist data={animeData}/>} />
-          <Route path='/animeinfo/name/:name/category/:category' element={<AnimeInfo data={animeData}/>} />
-           <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard data={animeData}  />
-            </PrivateRoute>
-          }></Route> 
-      </Routes>
-      </BrowserRouter> 
+     <BrowserRouter>
+  <Routes>
+    <Route path="/login" element={<Login />} />
+    <Route path="/main" element={<Main />} />
+    <Route path="/signup" element={<SignUp />} />
+    <Route path="/home" element={user ? <Home dataa={animeData} /> : <Navigate to="/main" />} />
+    <Route path="/animes" element={user ? <Animes data={animeData} /> : <Navigate to="/main" />} />
+    <Route path="/card" element={<Animes data={animeData} />} />
+    <Route path="/search" element={<Search />} />
+    <Route path="/watchlist" element={<Watchlist data={animeData} />} />
+    <Route path="/animeinfo/name/:name/category/:category" element={<AnimeInfo data={animeData} />} />
+    <Route
+      path="/dashboard"
+      element={
+        <PrivateRoute>
+          <Dashboard data={animeData} />
+        </PrivateRoute>
+      }
+    />
+    {/* This wildcard route should be placed at the bottom */}
+    <Route path="*" element={<Navigate to={user ? "/home" : "/main"} />} />
+  </Routes>
+</BrowserRouter>
+
     </>
   )
 }

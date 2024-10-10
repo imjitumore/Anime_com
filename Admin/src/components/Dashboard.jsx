@@ -227,7 +227,7 @@ function ChangePassword() {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/changepass/${adminId}`, {
+      const response = await fetch(`https://anime-com-backend.onrender.com/api/changepass/${adminId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),

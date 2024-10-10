@@ -57,7 +57,7 @@ function App() {
           <Route path="/login" element={<Login  />} />
           <Route path="/main" element={<Main  />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/main" />} /> 
+          <Route path="*" element={!user?<Navigate to="/main" />:<Navigate to={"/home"}/>} /> 
           <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/main"}/>}></Route>
           <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/main"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />

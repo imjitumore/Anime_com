@@ -50,7 +50,7 @@ export const Dashboard = () => {
   
     try {
       // Send the file via a POST request using fetch
-      const response = await fetch(`http://localhost:4000/api/profile/${user.userId}`, {
+      const response = await fetch(`https://anime-com-backend.onrender.com/api/profile/${user.userId}`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -64,7 +64,7 @@ export const Dashboard = () => {
       }
   
       const data = await response.json();
-      console.log('File uploaded successfully:', data);
+      alert("Profile Updated")
     } catch (error) {
       console.error('Error uploading file:', error);
     }
@@ -97,7 +97,7 @@ export const Dashboard = () => {
         <ul className="py-24 px-6 w-[22%]  border-white h-full fixed  bg-[#232323]">
           <div className="flex justify-center bg-transparent">
            <label className="bg-transparent" htmlFor="profile">
-           <img className={user.profileImage?"h-28 my-2 bg-transparent rounded-full":"h-28 my-2  bg-transparent"} src={user.profileImage?`http://localhost:4000/${user.profileImage}`:admin} alt="" />
+           <img className={user.profileImage?"h-28 my-2 bg-transparent rounded-full":"h-28 my-2  bg-transparent"} src={user.profileImage?`https://anime-com-backend.onrender.com/${user.profileImage}`:admin} alt="" />
            </label>
            <input type="file" hidden id="profile" onChange={handleFileChange}/>
           </div>

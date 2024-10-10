@@ -13,12 +13,9 @@ import { Dashboard } from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import { Search } from "./components/Search";
 import { Main } from "./components/Main";
-import { useNavigate } from "react-router-dom";
-
 function App() {
   const [animeData, setAnimeData] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
   const [user, setUser] = useState(null);
   const result = async () => {
     try {

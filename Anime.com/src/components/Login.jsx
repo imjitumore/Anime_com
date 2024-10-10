@@ -14,8 +14,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-
     try {
       const response = await fetch('https://anime-com-backend.onrender.com/api/login', {
         method: 'POST',
@@ -37,7 +35,6 @@ const Login = () => {
       setError('Failed to login');
     }
   };
- // localStorage.removeItem('user'); // Remove user data from localStorage
 
   return (
     <>

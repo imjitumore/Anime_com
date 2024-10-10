@@ -104,7 +104,7 @@ export const AnimeInfo = ({ data }) => {
           <div className=" flex w-full gap-4 my-4 px-4">
             <img
               className="h-[500px]"
-              src={`http://localhost:4000/${anime.image}`}
+              src={`https://anime-com-backend.onrender.com/${anime.image}`}
               alt=""
             />
             <div className="bg-transparent w-full">

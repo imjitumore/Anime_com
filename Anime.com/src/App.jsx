@@ -6,11 +6,8 @@ import { Home } from './components/Home'
 import { Animes } from './components/Animes'
 import {BrowserRouter, Form, Navigate, Route, Routes} from "react-router-dom"
 import { AnimeInfo } from './components/AnimeInfo'
-import { TMDB } from './components/TMDB'
-import { Fetch } from './components/Fetch'
-import { Formfill } from './components/Formfill'
 import Login from './components/Login'
- import SignUp from './components/SignUp'
+import SignUp from './components/SignUp'
 import { Watchlist } from './components/Watchlist'
 import { Dashboard } from './components/Dashboard'
 import  PrivateRoute  from './components/PrivateRoute'
@@ -60,7 +57,7 @@ function App() {
           <Route path="/login" element={<Login  />} />
           <Route path="/main" element={<Main  />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/main" />} /> 
+          <Route path="/" element={<Navigate to="/main" />} /> 
           <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/main"}/>}></Route>
           <Route path='/animes' element={user?<Animes data={animeData}/>:<Navigate to={"/main"}/>} />
           <Route path='/card' element={<Animes data={animeData}/>} />

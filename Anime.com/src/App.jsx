@@ -55,7 +55,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login  />} />
-          <Route path="/main" element={<Main  />} />
+          <Route path="/" element={<Main  />} />
           <Route path="/signup" element={<SignUp />} />
           {/* <Route path="" element={!user?<Navigate to="/main" />:<Navigate to={"/home"}/>} />  */}
           <Route path='/home' element={user?< Home dataa={animeData}/>:<Navigate to={"/main"}/>}></Route>

@@ -70,7 +70,7 @@ export const AddAnime = () => {
           </p>
           <div className="bg-transparent py-2">
             <button
-              className="py-2  bg-[#20b620] font-semibold text-white  rounded-md w-48 mx-2 my-3  bg-transparent "
+              className="py-2  bg-[#28d528] font-semibold text-white  rounded-md w-48 mx-2 my-3  bg-transparent "
               type="submit"
               onClick={addNewAnime}
             >

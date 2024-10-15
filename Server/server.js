@@ -97,22 +97,7 @@ app.post('/api/profile/:userId', (req, res) => {
 
 
 
-app.post("/api/search", async (req, res) => {
-  try {
-    const collection = await dbConnect();
-    const data = await collection.find({
-      $or: [
-        {
-          name: { $regex: req.body.name, $options: "i" } // Case-insensitive search
-        }
-      ]
-    }).toArray(); 
-    console.log(data)
-    res.status(200).json(data); // Send data 
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching data", error }); // Handle errors
-  }
-})
+
 
 
 app.get("/api/getwatchlist/:id", async (req, res) => {

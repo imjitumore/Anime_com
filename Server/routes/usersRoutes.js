@@ -1,9 +1,11 @@
+const express = require("express")
+
 const {userlogin} = require("../controllers/Login")
 const { SearchAnime } = require("../controllers/Search")
 const {signup} = require("../controllers/SignUp")
+const { getWatchlist, updateWatchlist, removeWatchlist } = require("../controllers/Watchlist")
 const {getAnimes} = require("../controllers/getAnimes")
 
-const express = require("express")
 const router = express.Router()
 
 //User Login Route
@@ -17,4 +19,10 @@ router.post("/signup",signup)
 
 //सेअरच अनिमे Search Anime
 router.post("/search",SearchAnime)
+
+// User Watchlist
+router.get("/getwatchlist/:id",getWatchlist)
+router.delete("/removeAnime/:userId/:animeName",removeWatchlist)
+router.put("/watchlist/:id",updateWatchlist)
+
 module.exports = router

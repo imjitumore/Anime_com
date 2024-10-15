@@ -21,7 +21,7 @@ export const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/getUsersProfile/${user.userId}`
+          `https://anime-com-backend.onrender.com/api/getUsersProfile/${user.userId}`
         );
         const data = await response.json();
         console.log(data);
@@ -69,7 +69,7 @@ export const Dashboard = () => {
     try {
       // Send the file via a POST request using fetch
       const response = await fetch(
-        `http://localhost:4000/api/profile/${user.userId}`,
+        `https://anime-com-backend.onrender.com/api/profile/${user.userId}`,
         {
           method: "POST",
           body: formData,
@@ -131,7 +131,7 @@ export const Dashboard = () => {
               ) : (
                 <img
                 className="bg-transparent py-2 px-2 h-32 border-2 rounded-full"
-                  src={`http://localhost:4000/${profile.profileImage}`}
+                  src={`https://anime-com-backend.onrender.com/${profile.profileImage}`}
                   alt="Profile Image"
                 />
               )}
@@ -201,7 +201,7 @@ function WatchList() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.userId) {
-      fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
+      fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch watchlist");
@@ -217,14 +217,14 @@ function WatchList() {
 
   function deleteAnime(name) {
     const userId = JSON.parse(localStorage.getItem("user"));
-    fetch(`http://localhost:4000/api/removeAnime/${userId.userId}/${name}`, {
+    fetch(`https://anime-com-backend.onrender.com/api/removeAnime/${userId.userId}/${name}`, {
       method: "DELETE",
       headers: { "Contect-type": "application/json" },
       body: JSON.stringify({ name }),
     })
       .then((response) => response.json())
       .then(() => {
-        fetch("http://localhost:4000/api/getwatchlist")
+        fetch("https://anime-com-backend.onrender.com/api/getwatchlist")
           .then((resp) => resp.json())
           .then((data) => setWatchlist(data));
       });
@@ -243,7 +243,7 @@ function WatchList() {
                 <div>
                   <img
                     className="text-white w-52 object-cover"
-                    src={`http://localhost:4000/${item.image}`}
+                    src={`https://anime-com-backend.onrender.com/${item.image}`}
                     alt={item.image}
                   />
                 </div>
@@ -312,7 +312,7 @@ function History() {
 
   useEffect(() => {
     // Fetch user history only once after component mount
-    fetch(`http://localhost:4000/api/gethistory/${userId.userId}`)
+    fetch(`https://anime-com-backend.onrender.com/api/gethistory/${userId.userId}`)
       .then((resp) => resp.json())
       .then((historyData) => setData(historyData)) // Set the history data
       .catch((error) => console.error("Error fetching history:", error)); // Handle any fetch errors
@@ -329,7 +329,7 @@ function History() {
               <div className="  h-full my-3">
                 <img
                   className="py-2 px-4"
-                  src={`http://localhost:4000/${item.image}`}
+                  src={`https://anime-com-backend.onrender.com/${item.image}`}
                   alt={item.image}
                 />
                 <p className="text-xl font-semibold px-4 my-1">{item.name}</p>
@@ -369,7 +369,7 @@ function ChangePassword() {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/changepassword/${userId}`,
+        `https://anime-com-backend.onrender.com/api/changepassword/${userId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

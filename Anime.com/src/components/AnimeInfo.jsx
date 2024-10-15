@@ -46,7 +46,7 @@ export const AnimeInfo = ({ data }) => {
     if (anime) {
       const userId = JSON.parse(localStorage.getItem("user"));
       fetch(
-        `http://localhost:4000/api/history/${userId.userId}`,
+        `https://anime-com-backend.onrender.com/api/history/${userId.userId}`,
         {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -64,7 +64,7 @@ export const AnimeInfo = ({ data }) => {
     console.log(userId);
     try {
       const response = await fetch(
-        `http://localhost:4000/api/watchlist/${userId.userId}`,
+        `https://anime-com-backend.onrender.com/api/watchlist/${userId.userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -97,14 +97,14 @@ export const AnimeInfo = ({ data }) => {
         <div className="text-white group overflow-hidden h-full">
           <img
             className="  w-full"
-            src={`http://localhost:4000/${anime.bgimage}`}
+            src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
             alt={anime.image}
           />
 
           <div className=" flex w-full gap-4 my-4 px-4">
             <img
               className="h-[500px]"
-              src={`http://localhost:4000/${anime.image}`}
+              src={`https://anime-com-backend.onrender.com/${anime.image}`}
               alt=""
             />
             <div className="bg-transparent w-full">

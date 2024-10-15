@@ -5,15 +5,35 @@ import logo from "/logo.png";
 import admin from "/add-user.png";
 import { MdHistory, MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
-import {toast,ToastContainer} from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState("");
   const navigate = useNavigate();
-  const [file,setFile] = useState(null)
+  const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    // if (!user?.userId) return; // Use optional chaining to ensure user exists
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/getUsersProfile/${user.userId}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setProfile(data.users); // Set profile state with the fetched data
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchProfile();
+  }, [user?.userId]); // Ensure the effect runs when userId changes
+
   useEffect(() => {
     const loggedUser = localStorage.getItem("user");
 
@@ -28,7 +48,7 @@ export const Dashboard = () => {
       navigate("/login");
     }
     setLoading(false); // set loading to false after checking
-  }, [user,navigate]);
+  }, [navigate]);
 
   //const username = user.email
   //console.log(username)
@@ -38,38 +58,40 @@ export const Dashboard = () => {
   };
   if (loading) return <p>Loading...</p>;
 
-
-
   const handleFileChange = async (e) => {
-   const selectedFile = e.target.files[0];
-   e.preventDefault();
-  
+    const selectedFile = e.target.files[0];
+    e.preventDefault();
+
     // Create a new FormData object
     const formData = new FormData();
-    formData.append('profile', selectedFile); // Append the selected file
-  
+    formData.append("profile", selectedFile); // Append the selected file
+
     try {
       // Send the file via a POST request using fetch
-      const response = await fetch(`https://anime-com-backend.onrender.com/api/profile/${user.userId}`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          // No need to set Content-Type when using FormData with fetch
-        },
-      });
-  
+      const response = await fetch(
+        `http://localhost:4000/api/profile/${user.userId}`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            // No need to set Content-Type when using FormData with fetch
+          },
+        }
+      );
+
       // Check if the response is OK
       if (!response.ok) {
-        throw new Error('Error uploading file');
+        throw new Error("Error uploading file");
       }
-  
+
       const data = await response.json();
-      alert("Profile Updated")
+      alert("Profile Updated");
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error("Error uploading file:", error);
     }
   };
-  
+
+  console.log(profile);
 
   return (
     <>
@@ -96,10 +118,31 @@ export const Dashboard = () => {
       <div className=" text-white flex  h-full">
         <ul className="py-24 px-6 w-[22%]  border-white h-full fixed  bg-[#232323]">
           <div className="flex justify-center bg-transparent">
-           <label className="bg-transparent" htmlFor="profile">
-           <img className={user.profileImage?"h-28 my-2 bg-transparent rounded-full":"h-28 my-2  bg-transparent"} src={user.profileImage?`https://anime-com-backend.onrender.com/${user.profileImage}`:admin} alt="" />
-           </label>
-           <input type="file" hidden id="profile" onChange={handleFileChange}/>
+            <label className="bg-transparent" htmlFor="profile">
+              {!profile || !profile.profileImage ? (
+                <div>
+                  <img
+                 
+                    className="bg-transparent py-2 px-2 h-32 border-2 rounded-full"
+                    src={admin}
+                    alt=""
+                  />
+                </div>
+              ) : (
+                <img
+                className="bg-transparent py-2 px-2 h-32 border-2 rounded-full"
+                  src={`http://localhost:4000/${profile.profileImage}`}
+                  alt="Profile Image"
+                />
+              )}
+            </label>
+
+            <input
+              type="file"
+              hidden
+              id="profile"
+              onChange={handleFileChange}
+            />
           </div>
           <p className="text-xl text-center text-white font-semibold flex items-center justify-center gap-2 bg-transparent my-2">
             {user.email.toUpperCase().replace("@GMAIL.COM", "")}
@@ -132,7 +175,6 @@ export const Dashboard = () => {
             <CiSettings className="text-2xl bg-transparent" />
             Settings
           </li>
-          
         </ul>
         <div className="ml-6 my-20 pl-[22%]">
           {allItems == "" ? (
@@ -140,9 +182,9 @@ export const Dashboard = () => {
           ) : allItems == "watchlist" ? (
             <WatchList />
           ) : allItems == "Settings" ? (
-            <ChangePassword/>
+            <ChangePassword />
           ) : allItems == "History" ? (
-            <History/>
+            <History />
           ) : (
             ""
           )}
@@ -159,9 +201,7 @@ function WatchList() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.userId) {
-      fetch(
-        `https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`
-      )
+      fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch watchlist");
@@ -177,17 +217,14 @@ function WatchList() {
 
   function deleteAnime(name) {
     const userId = JSON.parse(localStorage.getItem("user"));
-    fetch(
-      `https://anime-com-backend.onrender.com/api/removeAnime/${userId.userId}/${name}`,
-      {
-        method: "DELETE",
-        headers: { "Contect-type": "application/json" },
-        body: JSON.stringify({ name }),
-      }
-    )
+    fetch(`http://localhost:4000/api/removeAnime/${userId.userId}/${name}`, {
+      method: "DELETE",
+      headers: { "Contect-type": "application/json" },
+      body: JSON.stringify({ name }),
+    })
       .then((response) => response.json())
       .then(() => {
-        fetch("https://anime-com-backend.onrender.com/api/getwatchlist")
+        fetch("http://localhost:4000/api/getwatchlist")
           .then((resp) => resp.json())
           .then((data) => setWatchlist(data));
       });
@@ -206,7 +243,7 @@ function WatchList() {
                 <div>
                   <img
                     className="text-white w-52 object-cover"
-                    src={`https://anime-com-backend.onrender.com/${item.image}`}
+                    src={`http://localhost:4000/${item.image}`}
                     alt={item.image}
                   />
                 </div>
@@ -236,7 +273,6 @@ function WatchList() {
     </>
   );
 }
-
 
 function UserDashboard() {
   const [user, setUser] = useState(null);
@@ -272,11 +308,11 @@ function UserDashboard() {
 
 function History() {
   const [data, setData] = useState([]);
-  const userId = JSON.parse(localStorage.getItem("user"))
+  const userId = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     // Fetch user history only once after component mount
-    fetch(`https://anime-com-backend.onrender.com/api/gethistory/${userId.userId}`)
+    fetch(`http://localhost:4000/api/gethistory/${userId.userId}`)
       .then((resp) => resp.json())
       .then((historyData) => setData(historyData)) // Set the history data
       .catch((error) => console.error("Error fetching history:", error)); // Handle any fetch errors
@@ -289,18 +325,16 @@ function History() {
       <div className="grid grid-cols-4">
         {data.map((item) => {
           return (
-            <Link
-                    to={`/animeinfo/name/${item.name}/category/${item.category}`}
-                  >
-            <div className="  h-full my-3">
-              <img
-                className="py-2 px-4"
-                src={`https://anime-com-backend.onrender.com/${item.image}`}
-                alt={item.image}
-              />
-              <p className="text-xl font-semibold px-4 my-1">{item.name}</p>
-              <p className="text-md px-4">{item.language}</p>
-            </div>
+            <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
+              <div className="  h-full my-3">
+                <img
+                  className="py-2 px-4"
+                  src={`http://localhost:4000/${item.image}`}
+                  alt={item.image}
+                />
+                <p className="text-xl font-semibold px-4 my-1">{item.name}</p>
+                <p className="text-md px-4">{item.language}</p>
+              </div>
             </Link>
           );
         })}
@@ -310,98 +344,104 @@ function History() {
 }
 
 function ChangePassword() {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const userId = JSON.parse(localStorage.getItem("user")).userId;
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
-   
+
     if (newPassword !== confirmPassword) {
-      toast.error("New Password does not match",{
-        position:"top-center",
-        autoClose:2000,
-        hideProgressBar:false,
-        closeOnClick:true,
-        pauseOnHover:true,
-        draggable:true,
-        progress:undefined,
-        theme:"light"
-      })
+      toast.error("New Password does not match", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
 
     try {
-      const response = await fetch(`https://anime-com-backend.onrender.com/api/changepassword/${userId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentPassword, newPassword }),
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/changepassword/${userId}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        }
+      );
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to change password.');
+        throw new Error(result.message || "Failed to change password.");
       }
-      alert("Password changed successfully.")
+      alert("Password changed successfully.");
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
   };
 
   return (
     <>
-    <ToastContainer/>
-    <div className="password-change-form text-white">
-      <div className="text-3xl font-semibold text-white mx-2  my-5">
-        Change Your Password
-      </div>
-      <form className="px-3" onSubmit={handlePasswordChange}>
-        <div className="my-5">
-          <label className="text-lg font-semibold  ">Current Password:</label>
-          <br />
-          <input 
-          className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
-            type="password" 
-            value={currentPassword} 
-            onChange={(e) => setCurrentPassword(e.target.value)} 
-            required
-            placeholder="Enter Current Password"
-          />
+      <ToastContainer />
+      <div className="password-change-form text-white">
+        <div className="text-3xl font-semibold text-white mx-2  my-5">
+          Change Your Password
         </div>
-        <div>
-          <label className="text-lg font-semibold ">New Password</label><br />  
-          <input 
-            className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
-            type="password" 
-            value={newPassword} 
-            onChange={(e) => setNewPassword(e.target.value)} 
-            required
-            placeholder="Enter New Password"
-          />
-        </div>
-        <div className="my-5">
-          <label className="text-lg font-semibold">Confirm New Password:</label>
-          <br />
-          <input 
-            className='border-white text-white border-2 py-2 px-4 rounded-md font-semibold'
-            type="password" 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
-            required
-            placeholder="Please Confirm New Password"
-          />
-        </div>
-        <button
-          type="submit"
-            className=" bg-[#f00072] text-white font-semibold px-4 py-2 rounded">
+        <form className="px-3" onSubmit={handlePasswordChange}>
+          <div className="my-5">
+            <label className="text-lg font-semibold  ">Current Password:</label>
+            <br />
+            <input
+              className="border-white text-white border-2 py-2 px-4 rounded-md font-semibold"
+              type="password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              required
+              placeholder="Enter Current Password"
+            />
+          </div>
+          <div>
+            <label className="text-lg font-semibold ">New Password</label>
+            <br />
+            <input
+              className="border-white text-white border-2 py-2 px-4 rounded-md font-semibold"
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              placeholder="Enter New Password"
+            />
+          </div>
+          <div className="my-5">
+            <label className="text-lg font-semibold">
+              Confirm New Password:
+            </label>
+            <br />
+            <input
+              className="border-white text-white border-2 py-2 px-4 rounded-md font-semibold"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder="Please Confirm New Password"
+            />
+          </div>
+          <button
+            type="submit"
+            className=" bg-[#f00072] text-white font-semibold px-4 py-2 rounded"
+          >
             Change Password
           </button>
-      </form>
-    </div>
+        </form>
+      </div>
     </>
   );
 }

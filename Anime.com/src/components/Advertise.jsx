@@ -13,7 +13,7 @@ export const Advertise = (props) => {
         <hr />
         <div className='grid grid-cols-2 px-8 text-white gap-6 my-10' onClick={scrollToTop}>
             <div>
-                <img src={`https://anime-com-backend.onrender.com/${props.image}`} alt="" />
+                <img src={`http://localhost:4000/${props.image}`} alt="" />
             </div>
             <div className='px-2'>
                 <p className='text-4xl py-2'>{props.name}</p>

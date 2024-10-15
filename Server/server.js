@@ -4,20 +4,20 @@ const path = require('path');
 const fs = require('fs');
 const app = express()
 const cors = require("cors")
-
+const userRoute = require("./routes/usersRoutes")
 app.use(express.json())
 app.use(cors())
 const { MongoClient, CURSOR_FLAGS, ObjectId } = require("mongodb")
 const url = "mongodb+srv://jitendraumore99:0wy73T6HU7ahAkIL@animecom.ukiff.mongodb.net/"
 const client = new MongoClient(url)
 
+
+
 const dbConnection = async () => {
   const result = await client.connect()
   const db = result.db("MongoDb")
   return db.collection("users")
 }
-
-
 app.use('/uploads', express.static('uploads'))
 
 const storage = multer.diskStorage({
@@ -52,11 +52,8 @@ function checkFileType(file, cb) {
 }
 
 app.use(express.json())
-const dbConnect = async () => {
-  const result = await client.connect()
-  const db = result.db("MongoDb")
-  return db.collection("Anime_com")
-}
+app.use("/api",userRoute)
+
 
 
 app.post('/api/profile/:userId', (req, res) => {
@@ -94,17 +91,6 @@ app.post('/api/profile/:userId', (req, res) => {
   });
 });
 
-
-
-app.get("/api/getanimes", async (req, res) => {
-  try {
-    const collection = await dbConnect();
-    const data = await collection.find({}, { image: 1 }).toArray(); // Fetch data
-    res.status(200).json(data); // Send data 
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching data", error }); // Handle errors
-  }
-})
 
 
 app.post("/api/search", async (req, res) => {
@@ -268,29 +254,6 @@ app.delete("/api/removeAnime/:userId/:animeName", async (req, res) => {
 });
 
 
-app.post("/api/signup", async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email, password)
-  // Check if the email and password are provided
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required." });
-  }
-
-  try {
-    const collection = await dbConnection();
-
-    // Check if the user already exists in MongoDB
-    const userExists = await collection.findOne({ email });
-    if (userExists) {
-      return res.status(409).json({ message: "User already exists." });
-    }
-    const result = await collection.insertOne({ email: email, password: password });
-    console.log(result.acknowledged)
-    res.status(201).json({ message: "User created successfully", userId: result.insertedId });
-  } catch (error) {
-    res.status(500).json({ message: "Error during signup", error });
-  }
-});
 
 app.put("/api/watchlist/:id", async (req, res) => {
   console.log(req.params.id)
@@ -306,36 +269,6 @@ app.put("/api/watchlist/:id", async (req, res) => {
 });
 
 
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email, password)
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required." });
-  }
-  try {
-    const collection = await dbConnection();
-
-    // Find user by email
-    const user = await collection.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
-    }
-
-    // Compare provided password with the stored password (no hashing here)
-    if (password !== user.password) {
-      return res.status(401).json({ message: "Invalid credentials." });
-    }
-    const profileImageUrl = user.profileImage 
-
-    res.status(200).json({
-      message: "Login successful...New Messgae",
-      userId: user._id,
-      email: user.email,
-      profileImage: profileImageUrl, // Send complete image URL
-    });  } catch (error) {
-    res.status(500).json({ message: "Error during login", error });
-  }
-});
 
 
 //Admin APIS
@@ -397,6 +330,20 @@ app.get("/api/getUsers", async (req, res) => {
   try {
     const collection = await dbConnection();
     const result = await collection.find({}).toArray(); // Don't forget to use .toArray() to fetch the results.
+    console.log(result)
+    res.status(200).json({ message: "All Users Found", users: result });
+  } catch (error) {
+    res.status(404).json({ message: "No data Found", error: error.message });
+  }
+
+});
+
+app.get("/api/getUsersProfile/:userId", async (req, res) => {
+  try {
+    const collection = await dbConnection();
+    const userId = req.params.userId
+    console.log(userId)
+    const result = await collection.findOne({ _id: new ObjectId(userId) }) // Don't forget to use .toArray() to fetch the results.
     console.log(result)
     res.status(200).json({ message: "All Users Found", users: result });
   } catch (error) {

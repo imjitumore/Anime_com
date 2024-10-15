@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-import { Navbar } from "./components/Navbar";
 import { Home } from "./components/Home";
 import { Animes } from "./components/Animes";
 import { BrowserRouter, Form, Navigate, Route, Routes } from "react-router-dom";
@@ -23,7 +22,7 @@ function App() {
   const result = async () => {
     try {
       const resp = await fetch(
-        "https://anime-com-backend.onrender.com/api/getanimes",
+        "http://localhost:4000/api/getanimes",
         {
           method: "GET",
           headers: { "Content-Type": "application/json" }, // Fixed header typo

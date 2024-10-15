@@ -21,7 +21,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch("https://anime-com-backend.onrender.com/api/signup", {
+      const response = await fetch("http:localhost:4000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

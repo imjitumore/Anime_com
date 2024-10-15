@@ -56,6 +56,7 @@ function checkFileType(file, cb) {
 }
 
 app.use(express.json())
+
 app.use("/api",userRoute)
 
 

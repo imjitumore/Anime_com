@@ -11,9 +11,9 @@ export const Watchlist = ({ data }) => {
         if (user && user.userId) {
           fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`)
             .then((response) => {
-              if (!response.ok) {
-                throw new Error('Failed to fetch watchlist');
-              }
+              // if (!response.ok) {
+              //   throw new Error('Failed to fetch watchlist');
+              // }
               return response.json();
             })
             .then((data) => setWatchlist(data))

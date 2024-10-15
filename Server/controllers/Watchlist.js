@@ -5,7 +5,7 @@ const dbConnection = async () => {
     return db.collection("users")
   }
 
-const getWatchlist=  async (req, res) => {
+const getWatchlist =  async (req, res) => {
     try {
       const collection = await dbConnection();
       const userId = req.params.id;

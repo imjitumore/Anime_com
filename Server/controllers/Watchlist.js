@@ -12,7 +12,7 @@ const getWatchlist =  async (req, res) => {
       const collection = await dbConnection();
       const userId = req.params.id;
   
-      const user = await collection.findOne({ _id:  ObjectId(userId) });
+      const user = await collection.findOne({ _id: new ObjectId(userId) });
   
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -33,7 +33,7 @@ const removeWatchlist = async (req, res) => {
   
       // Find and update the user's watchlist by pulling the anime from the array
       const result = await collection.updateOne(
-        { _id:   ObjectId(userId) },  // Match the user by their ObjectId
+        { _id:  new ObjectId(userId) },  // Match the user by their ObjectId
         { $pull: { watchlist: { name: animeName } } }  // Remove the anime from the watchlist array
       );
   
@@ -54,7 +54,7 @@ const updateWatchlist =  async (req, res) => {
     console.log(req.params.id)
     try {
       const collection = await dbConnection();
-      const data = await collection.updateOne({ _id:  ObjectId(req.params.id) }, { $push: { watchlist: req.body  }}); // update data into the collection
+      const data = await collection.updateOne({ _id: new ObjectId(req.params.id) }, { $push: { watchlist: req.body  }}); // update data into the collection
       console.log("Data updated:", data); // Optional: Log the inserted data
       res.status(200).json({ message: "Added to watchlist" });
     } catch (error) {

@@ -105,7 +105,7 @@ export const AnimeInfo = ({ data }) => {
             <img
               className="h-[500px]"
               src={`https://anime-com-backend.onrender.com/${anime.image}`}
-              alt=""
+              alt=""  
             />
             <div className="bg-transparent w-full">
               <iframe

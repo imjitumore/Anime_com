@@ -13,9 +13,12 @@ import { Dashboard } from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import { Search } from "./components/Search";
 import { Main } from "./components/Main";
+// import { useNavigate } from "react-router-dom";
+
 function App() {
   const [animeData, setAnimeData] = useState([]);
   const [error, setError] = useState(null);
+  // const navigate = useNavigate()
   const [user, setUser] = useState(null);
   const result = async () => {
     try {
@@ -41,6 +44,7 @@ function App() {
   useEffect(() => {
     result();
     setUser(localStorage.getItem("user"))
+    
   }, [user]);
 
  
@@ -49,19 +53,19 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login"  element={<Login />} />
           <Route path="/main" element={<Main />} />
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/home"
             element={
-              user ? <Home dataa={animeData} /> : <Navigate to="/main" />
+              <Home dataa={animeData}  />
             }
           />
           <Route
             path="/animes"
             element={
-              user ? <Animes data={animeData} /> : <Navigate to="/main" />
+             <Animes data={animeData} />
             }
           />
           <Route path="/card" element={<Animes data={animeData} />} />

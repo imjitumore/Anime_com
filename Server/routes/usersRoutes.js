@@ -1,13 +1,13 @@
 const express = require("express")
 
-const {userlogin} = require("../controllers/Login")
-const { SearchAnime } = require("../controllers/Search")
-const {signup} = require("../controllers/SignUp")
-const { getWatchlist, updateWatchlist, removeWatchlist } = require("../controllers/Watchlist")
-const {getAnimes} = require("../controllers/getAnimes")
-const { updateHistory, getHistory } = require("../controllers/History")
-const { changepass } = require("../controllers/changePassword")
-const { userProfile } = require("../controllers/Profile")
+const {userlogin} = require("../userControllers/Login")
+const { SearchAnime } = require("../userControllers/Search")
+const {signup} = require("../userControllers/SignUp")
+const { getWatchlist, updateWatchlist, removeWatchlist } = require("../userControllers/Watchlist")
+const {getAnimes} = require("../userControllers/getAnimes")
+const { updateHistory, getHistory } = require("../userControllers/History")
+const { changepass } = require("../userControllers/changePassword")
+const { userProfile, getUserProfile } = require("../userControllers/Profile")
 
 const router = express.Router()
 
@@ -37,6 +37,7 @@ router.post("/changepassword/:id",changepass)
 
 // User Profile
 router.post("/profile/:userId",userProfile)
+router.post("/getUsersProfile/:userId",getUserProfile)
 
 
 

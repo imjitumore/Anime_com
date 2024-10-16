@@ -37,7 +37,7 @@ router.post("/changepassword/:id",changepass)
 
 // User Profile
 router.post("/profile/:userId",userProfile)
-router.post("/getUsersProfile/:userId",getUserProfile)
+router.get("/getUsersProfile/:userId",getUserProfile)
 
 
 

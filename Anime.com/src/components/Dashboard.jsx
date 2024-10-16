@@ -91,8 +91,6 @@ export const Dashboard = () => {
     }
   };
 
-  console.log(profile);
-
   return (
     <>
       <div className="flex justify-between items-center px-5 pr-8 py-4 z-10 fixed w-full">
@@ -120,10 +118,10 @@ export const Dashboard = () => {
           <div className="flex justify-center bg-transparent">
             <label className="bg-transparent" htmlFor="profile">
               {!profile || !profile.profileImage ? (
-                <div>
+                <div className="bg-transparent">
                   <img
                  
-                    className="bg-transparent py-2 px-2 h-32 border-2 rounded-full"
+                    className="bg-[#232323] py-2 px-2 h-32 border-2 rounded-full"
                     src={admin}
                     alt=""
                   />

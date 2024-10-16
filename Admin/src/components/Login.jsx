@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import navigate for redirection
+import { Link, useNavigate } from "react-router-dom"; // Import navigate for redirection
 import user from "/programmer.png";
 
 export const Login = () => {
@@ -75,6 +75,7 @@ export const Login = () => {
               Login
             </button>
           </div>
+          <div className="text-white flex  font-bold gap-3">Don't Have Any Admin Ac?   <Link to={"/signup"}><p className="text-[red]">SingUp</p></Link> </div>
         </form>
       </div>
     </>

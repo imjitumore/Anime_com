@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     result();
-  }, []);
+  }, [animeAata]);
   return (
     <>
       <BrowserRouter>

@@ -5,7 +5,7 @@ const dbConnection = async () => {
     const result = await client.connect()
     const db = result.db("MongoDb")
     return db.collection("users")
-  }
+}
 
 const getWatchlist =  async (req, res) => {
     try {

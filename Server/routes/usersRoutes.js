@@ -5,6 +5,7 @@ const { SearchAnime } = require("../controllers/Search")
 const {signup} = require("../controllers/SignUp")
 const { getWatchlist, updateWatchlist, removeWatchlist } = require("../controllers/Watchlist")
 const {getAnimes} = require("../controllers/getAnimes")
+const { updateHistory, getHistory } = require("../controllers/History")
 
 const router = express.Router()
 
@@ -24,5 +25,10 @@ router.post("/search",SearchAnime)
 router.get("/getwatchlist/:id",getWatchlist)
 router.delete("/removeAnime/:userId/:animeName",removeWatchlist)
 router.put("/watchlist/:id",updateWatchlist)
+
+// User History
+router.get("/gethistory/:id",getHistory)
+router.post("/history/:id",updateHistory)
+
 
 module.exports = router

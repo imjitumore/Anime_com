@@ -1,7 +1,4 @@
 const express = require("express")
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 const app = express()
 const cors = require("cors")
 const userRoute = require("./routes/usersRoutes")
@@ -24,111 +21,13 @@ const dbConnection = async () => {
 }
 app.use('/uploads', express.static('uploads'))
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); 
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); 
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 5000000 } ,
-    fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-}).single('profile'); 
-
-
-function checkFileType(file, cb) {
-  // Allowed file extensions
-  const filetypes = /jpeg|jpg|png|gif/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Images only!');
-  }
-}
 
 app.use(express.json())
 
 app.use("/api",userRoute)
 
 
-
-app.post('/api/profile/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  upload(req, res, async (err) => {
-    if (err) {
-      return res.status(400).json({ error: err });
-    }
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
-
-    const filePath = req.file.path;
-    console.log(filePath,userId)
-    try {
-      const collection = await dbConnection()
-
-      const result = await collection.updateOne(
-        { _id: new  ObjectId(userId) }, // You can also use { userName: req.body.userName } if updating by userName
-        { $set: { profileImage: filePath } }
-      );
-
-      if (result.modifiedCount === 1) {
-        return res.status(200).json({
-          message: 'File uploaded and user profile updated successfully',
-          filePath: filePath,
-        });
-      } else {
-        return res.status(404).json({ error: 'User not found' });
-      }
-    } catch (error) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-  });
-});
-
-
-
-
-
-app.post('/api/changepassword/:id', async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
-  const userId = req.params.id;
-
-  try {
-    const collection = await dbConnection();
-    const user = await collection.findOne({ _id: new ObjectId(userId) });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found.' });
-    }
-
-    if (currentPassword !== user.password) {
-      return res.status(400).json({ message: 'Current password is incorrect.' });
-    }
-
-    // Update the password in the database (plain text)
-    await collection.updateOne(
-      { _id: new ObjectId(userId) },
-      { $set: { password: newPassword } }
-    );
-
-    res.status(200).json({ message: 'Password changed successfully.' });
-  } catch (error) {
-    console.error('Error changing password:', error);
-    res.status(500).json({ message: 'An error occurred while changing password.', error });
-  }
-});
-
+//Admin APIS
 app.post('/api/changepass/:id', async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const adminId = req.params.id;
@@ -161,7 +60,7 @@ app.post('/api/changepass/:id', async (req, res) => {
 
 
 
-//Admin APIS
+
 
 const AdminConnection = async () => {
   const result = await client.connect()

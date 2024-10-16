@@ -7,7 +7,6 @@ const dbConnection = async () => {
     return db.collection("users")
 }
 
-//app.get("/api/gethistory/:id",
 const getHistory= async (req, res) => {
     try {
       const collection = await dbConnection();
@@ -26,7 +25,6 @@ const getHistory= async (req, res) => {
     }
 }
 
-//app.post("/api/history/:id",
 const updateHistory =  async (req, res) => {
     try {
       const collection = await dbConnection();

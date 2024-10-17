@@ -85,7 +85,7 @@ export const Home = ({ dataa }) => {
                 <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}        >
                   <div className="slider">
                     <img
-                      className="slider w-full  object-cover relative "
+                      className="slider w-full  sm:h-full object-cover relative "
                       src={item.image}
                       alt=""
                     />

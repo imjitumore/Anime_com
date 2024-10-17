@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CiPassport1, CiSettings, CiUser, CiViewList } from "react-icons/ci";
+import { CiMenuBurger, CiPassport1, CiSettings, CiUser, CiViewList } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import logo from "/logo.png";
 import admin from "/add-user.png";
@@ -7,6 +7,9 @@ import { MdHistory, MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RxCross2 } from "react-icons/rx";
+import { FaMendeley } from "react-icons/fa";
+
 
 export const Dashboard = ({setUserr}) => {
   const [user, setUser] = useState(null);
@@ -15,6 +18,7 @@ export const Dashboard = ({setUserr}) => {
   const [allItems, setAllItems] = useState("");
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const [value,setValue] = useState(false)
 
   useEffect(() => {
     // if (!user?.userId) return; // Use optional chaining to ensure user exists
@@ -116,13 +120,13 @@ export const Dashboard = ({setUserr}) => {
       </div>
       <hr />
       <div className=" text-white flex  h-full">
-        <ul className="py-24 px-6 w-[22%]  border-white h-full fixed  bg-[#232323]">
+        <ul className={`${value?"py-24 px-6 sm:w-[22%] sm:static  absolute left-0  sm:block border-white transition-all ease-in-out duration-1000 h-screen  bg-[#232323]":"py-24 px-6 sm:w-[22%] sm:static transition-all ease-in-out duration-1000 -left-full  absolute border-white h-screen  bg-[#232323]"} `}>
+        <div className="text-white bg-transparent float-right"><RxCross2 onClick={()=>setValue(!value)}  className={`${value?"text-white sm:text-2xl text-lg cursor-pointer bg-transparent ":"text-white sm:text-2xl text-lg cursor-pointer bg-transparent hidden"}`}/></div>
           <div className="flex justify-center bg-transparent">
             <label className="bg-transparent" htmlFor="profile">
               {!profile || !profile.profileImage ? (
                 <div className="bg-transparent">
                   <img
-                 
                     className="bg-[#232323] py-2 px-2 h-32 border-2 rounded-full"
                     src={admin}
                     alt=""
@@ -176,7 +180,8 @@ export const Dashboard = ({setUserr}) => {
             Settings
           </li>
         </ul>
-        <div className="ml-6 my-20 pl-[22%]">
+        <div className="my-20 w-full">
+          <div className="ml-6"><CiMenuBurger onClick={()=>setValue(!value)} className={`${value?"text-xl hidden":"text-xl "}`}/></div>
           {allItems == "" ? (
             <UserDashboard />
           ) : allItems == "watchlist" ? (
@@ -232,14 +237,14 @@ function WatchList() {
 
   return (
     <>
-      <div className="text-3xl font-semibold text-white mx-2 ">
+      <div className="sm:text-3xl text-2xl sm:my-0 my-4  font-semibold text-white sm:mx-2 mx-5 ">
         MY Watch List
       </div>
-      <div className=" py-4 grid grid-cols-2 ">
+      <div className=" sm:py-4  sm:grid grid-cols-2  sm:mx-0  mx-3">
         {watchdata.map((item, i) => {
           return (
             <>
-              <div className="flex my-3 justify-between gap-2 mx-3  ">
+              <div className="flex sm:my-3 my-5 justify-between gap-2 mx-3 ">
                 <div>
                   <img
                     className="text-white w-52 object-cover"
@@ -247,20 +252,20 @@ function WatchList() {
                     alt={item.image}
                   />
                 </div>
-                <div className="text-white  text-xl font-semibold w-full">
+                <div className="text-white  sm:text-xl text-md font-semibold w-full">
                   {item.name}
                 </div>
                 <div>
                   <Link
                     to={`/animeinfo/name/${item.name}/category/${item.category}`}
                   >
-                    <button className="bg-[#00f2f2] py-2 w-36  font-semibold rounded-lg text-md">
+                    <button className="bg-[#00f2f2] sm:py-2 py-1  sm:mx-0 sm:w-36 w-32  font-semibold rounded-lg text-md">
                       Visit Anime
                     </button>
                   </Link>
                   <button
                     onClick={() => deleteAnime(item.name)}
-                    className="bg-[#f00079] py-2 my-2 w-36  font-semibold rounded-lg text-md"
+                    className="bg-[#f00079] sm:py-2 py-1 my-2 sm:w-36 w-32 font-semibold rounded-lg text-md"
                   >
                     Remove
                   </button>
@@ -288,17 +293,16 @@ function UserDashboard() {
   }
 
   return (
-    <div className="w-full">
-      <h2 className="text-2xl my-4 font-semibold text-center leading-relaxed text-white">
-        <div className="text-3xl">
+    <div className="w-full sm:py-0 py-10">
+      <h2 className="sm:text-2xl text-lg sm:px-0 px-4 my-4 font-semibold text-center leading-relaxed text-white">
+        <div className="sm:text-3xl text-2xl">
           <span className="text-[red]">Thank you</span> for joining US,{" "}
           {user.email}! <br />
         </div>
         <br />
         We're thrilled to have you as part of our community. <br />
         Get ready to dive into an endless world of anime adventures. <br />
-        <p className="text-[#f00072] text-3xl my-3">
-          {" "}
+        <p className="text-[#f00072] sm:text-3xl text-lg my-3">
           Enjoy watching and explore to your heart’s content!❤️🎥
         </p>
       </h2>
@@ -319,21 +323,21 @@ function History() {
   }, [userId]);
   return (
     <>
-      <h2 className="text-3xl font-semibold leading-relaxed text-white px-4">
+      <h2 className="text-3xl sm:my-0 my-4 font-semibold leading-relaxed text-white px-4">
         History
       </h2>
-      <div className="grid grid-cols-4">
+      <div className="grid sm:grid-cols-4 grid-cols-2 gap-4 mx-4">
         {data.map((item) => {
           return (
             <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-              <div className="  h-full my-3">
+              <div className="h-full sm:my-3 sm:py-0 py-2">
                 <img
-                  className="py-2 px-4"
+                  className="py-2 "
                   src={`https://anime-com-backend.onrender.com/${item.image}`}
                   alt={item.image}
                 />
-                <p className="text-xl font-semibold px-4 my-1">{item.name}</p>
-                <p className="text-md px-4">{item.language}</p>
+                <p className="sm:text-xl font-semibold  my-1">{item.name}</p>
+                <p className="text-md ">{item.language}</p>
               </div>
             </Link>
           );
@@ -391,11 +395,11 @@ function ChangePassword() {
   return (
     <>
       <ToastContainer />
-      <div className="password-change-form text-white">
-        <div className="text-3xl font-semibold text-white mx-2  my-5">
+      <div className="password-change-form text-white ">
+        <div className="am:text-3xl text-2xl font-semibold text-white mx-3  my-5 sm:text-left text-center w-full">
           Change Your Password
         </div>
-        <form className="px-3" onSubmit={handlePasswordChange}>
+        <form className=" w-full sm:px-4 px-14" onSubmit={handlePasswordChange}>
           <div className="my-5">
             <label className="text-lg font-semibold  ">Current Password:</label>
             <br />

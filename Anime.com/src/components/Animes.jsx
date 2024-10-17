@@ -19,7 +19,7 @@ export const Animes = ({ data }) => {
         <div className="text-white font-semibold text-xl px-4">
             <p>Filtered By</p>
         </div>
-        <div className=" anime-gird grid sm:grid-cols-5 grid-cols-3  px-4 w-full " onClick={scrollToTop}>
+        <div className=" anime-gird grid sm:grid-cols-5 grid-cols-2  px-4 w-full " onClick={scrollToTop}>
           {data.map((item, i) => {
             console.log(item.category)
             return (

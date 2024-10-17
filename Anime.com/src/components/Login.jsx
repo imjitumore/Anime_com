@@ -39,12 +39,12 @@ const Login = () => {
   return (
     <>
       <Navbar2 />
-      <div className="flex justify-center">
+      <div className="login-main w-full flex justify-center h-full ">
         <div className="">
-            <img className="h-[400px]" src={login} alt="" />
+            <img className="login-img h-[400px]" src={login} alt="" />
         </div>
-        <div className="text-white px-8  font-semibold">
-          <div className="w-[110%]">
+        <div className="login-container text-white px-8  font-semibold h-full">
+          <div className="w-full">
             <h2 className="text-3xl font-semibold text-center my-3">Log In</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -74,7 +74,7 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div className="w-36">
+        <div className="w-36 login-img">
         </div>
       </div></>
 

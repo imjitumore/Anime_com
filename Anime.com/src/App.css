@@ -1,0 +1,17 @@
+@media screen and (max-width: 430px) {
+    .nav-main{
+        width: 100% !important;
+    }
+    .nav-btn{
+        width:150px!important;
+    }
+
+    .login-img
+    {
+        display: none;
+    }
+    .login-container
+    {
+        width: 110% !important;
+    }
+}

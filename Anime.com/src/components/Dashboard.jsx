@@ -90,7 +90,7 @@ export const Dashboard = () => {
       console.error("Error uploading file:", error);
     }
   };
-
+ 
   return (
     <>
       <div className="flex justify-between items-center px-5 pr-8 py-4 z-10 fixed w-full">

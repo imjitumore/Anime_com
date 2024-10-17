@@ -44,10 +44,10 @@ const SignUp = () => {
   return (
     <>
       <Navbar2 />
-      <div className="flex  justify-center">
-        <div className="w-80">
+      <div className="flex justify-center ">
+        <div className="w-80 login-img">
         </div>
-        <div className="text-white  px-8 font-semibold">
+        <div className="login-container text-white  px-8 font-semibold ">
           <div className="">
             <h2 className="text-3xl font-semibold text-center my-4">Create New Account</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -91,7 +91,7 @@ const SignUp = () => {
             </form>
           </div>
         </div>
-        <div className="">
+        <div className="login-img">
             <img className="h-[400px] mt-4" src={signup} alt="" />
           </div>
       </div>

@@ -13,14 +13,13 @@ const dbConnection = async () => {
     }
     try {
       const collection = await dbConnection();
-  
       // Find user by email
       const user = await collection.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: "User not found." });
       }
   
-      // Compare provided password with the stored password (no hashing here)
+      // Compare provided password with the stored password
       if (password !== user.password) {
         return res.status(401).json({ message: "Invalid credentials." });
       }

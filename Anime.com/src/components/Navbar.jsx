@@ -14,7 +14,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 justify-between px-10 py-1 my-2 items-center text-white shadow-md relative">
+      <div className="grid grid-cols-2 justify-between px-10 py-1 my-2 items-center text-white shadow-md relative ">
         <div>
           <Link to={"/home"}>
             <img className="h-12 " src={logo} alt="" />

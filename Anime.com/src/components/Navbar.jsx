@@ -50,8 +50,8 @@ export const Navbar = () => {
       <div
         className={`${
           val
-            ? "flex gap-10 transform duration-700 w-full py-6 items-center justify-between absolute top-[-20%] z-10 px-10"
-            : "flex gap-10 w-full transform duration-700 py-6 items-center justify-between absolute top-0 z-10 px-10"
+            ? "flex sm:gap-10 gap-3 transform duration-700 w-full py-6 items-center justify-between absolute top-[-20%] z-10 sm:px-10 px-4"
+            : "flex sm:gap-10 w-full gap-3 transform duration-700 py-6 items-center justify-between absolute top-0 z-10 sm:px-10 px-4"
         } `}
       >
         <div className="w-full">

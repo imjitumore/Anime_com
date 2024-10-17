@@ -46,19 +46,21 @@ function App() {
     
   }, [user]);
 
+ console.log("user"+user)
  
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login"  element={<Login />} />
+          <Route path="/login"  element={!user? <Login setUserr={setUser} />:<Navigate to={"/home"}/>} />
           <Route path="/main" element={<Main />} />
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/home"
             element={
+              user?
               <Home dataa={animeData}  />
+              :<Navigate to={"/login"}/>
             }
           />
           <Route

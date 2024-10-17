@@ -5,7 +5,7 @@ import login from "/login.webp"
 import { Navbar2 } from "./Navbar2";
 
 
-const Login = () => {
+const Login = ({setUserr}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -28,6 +28,7 @@ const Login = () => {
       } else {
         // Store user data or token in localStorage
         localStorage.setItem('user', JSON.stringify(data)); // Store the entire user object or token
+        setUserr(JSON.stringify(data))
         // Redirect to Home
         navigate('/home');
       }

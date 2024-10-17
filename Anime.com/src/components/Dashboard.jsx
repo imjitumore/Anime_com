@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const Dashboard = () => {
+export const Dashboard = ({setUserr}) => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,8 +54,10 @@ export const Dashboard = () => {
   //console.log(username)
   const logout = () => {
     localStorage.removeItem("user"); // Remove user data from localStorage
+    setUserr(localStorage.removeItem("user"));
     navigate("/login"); // Redirect to the login page
   };
+
   if (loading) return <p>Loading...</p>;
 
   const handleFileChange = async (e) => {

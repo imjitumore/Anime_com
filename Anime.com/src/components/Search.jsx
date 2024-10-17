@@ -28,8 +28,8 @@ export const Search = () => {
     <>
       <Navbar />
       <div className="text-white mt-10 px-4 w-full">
-        <h1 className="text-white text-3xl font-semibold px-4">Searched Items:</h1>
-        <div className="my-8 text-white relative group grid grid-cols-5 px-3 ">
+        <h1 className="text-white sm:text-3xl text-2xl font-semibold px-4">Searched Items:</h1>
+        <div className="sm:my-8 my-5 text-white relative group grid sm:grid-cols-5 grid-cols-2 ">
         {data.map((item) => {
           return (
             <>
@@ -42,7 +42,7 @@ export const Search = () => {
                     alt={item.image}
                   />
                 </div>
-                <p className="font-semibold w-60 text-wrap py-2 pr-4">
+                <p className="font-semibold text-wrap py-2 ">
                   {item.name}
                 </p>
                 <p className="text-sm">{item.language}</p>

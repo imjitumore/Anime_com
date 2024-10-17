@@ -27,7 +27,7 @@ export const Search = () => {
   return (
     <>
       <Navbar />
-      <div className="text-white mt-10 px-4">
+      <div className="text-white mt-10 px-4 w-full">
         <h1 className="text-white text-3xl font-semibold px-4">Searched Items:</h1>
         <div className="my-8 text-white relative group grid grid-cols-5 px-3 ">
         {data.map((item) => {
@@ -35,7 +35,6 @@ export const Search = () => {
             <>
               <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>  
               <div className="flex flex-col w-full cursor-pointer rounded-lg px-2">
-
                 <div className="group overflow-hidden">
                   <img
                     className=" w-full hover:scale-110 transition-all duration-300 ease-in-out"

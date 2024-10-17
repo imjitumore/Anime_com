@@ -214,9 +214,9 @@ function PopularIndia() {
         {indiaanime.map((item, i) => {
           return (
             <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-              <div className="flex flex-col w-full cursor-pointer px-1 rounded-lg h-full">
+              <div className="flex flex-col w-full cursor-pointer px-1 rounded-lg ">
                 <img key={i} className="" src={item.image} alt="item.image" />
-                <p className="font-semibold w-60 py-2 pr-4">{item.name}</p>
+                <p className="font-semibold sm:w-60 w-40 py-2 px-1 pr-4">{item.name}</p>
                 <p className="text-sm">{item.language}</p>
               </div>
             </Link>
@@ -237,11 +237,31 @@ function Freeanime() {
   const settings = {
     infinite: true,
     speed: 300,
-    slidesToShow:5,
-    slidesToScroll: 2,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: false,
     autoplaySpeed: 2000,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768, // sm screens (e.g., tablets and below)
+        settings: {
+          slidesToShow: 2,  // Show 2 slides on smaller screens
+          slidesToScroll: 1, 
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 430, // xs screens (e.g., mobile)
+        settings: {
+          slidesToShow: 2,  // Show 1 slide on extra small screens
+          slidesToScroll: 1, 
+          infinite: true,
+        }
+      }
+    ]
   };
+  
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -256,14 +276,14 @@ function Freeanime() {
           {freeanime.map((item, i) => {
             return (
               <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-                <div className="flex flex-col cursor-pointer pl-4 ">
+                <div className="flex flex-col cursor-pointer pl-4">
                   <img
                     key={i}
                     className=""
                     src={item.image}
                     alt="item.image"
                   />
-                  <p className="font-semibold w-60 py-1">{item.name}</p>
+                  <p className="font-semibold sm:w-60 py-1">{item.name}</p>
                   <p className="text-sm">{item.language}</p>
                 </div>
               </Link>

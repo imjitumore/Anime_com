@@ -62,17 +62,17 @@ export const Navbar = () => {
         </div>{" "}
         <div>
           <button
-            className="py-3 gap-2 justify-center bg-[#f00070] font-semibold text-black rounded-md w-40 flex items-center "
+            className="search-btn sm:py-3 py-2 sm:gap-2 gap-0 justify-center bg-[#f00070] font-semibold text-black sm:rounded-md rounded-full sm:w-40 w-10  flex items-center "
             onClick={search}
           >
             <CiSearch className=" text-2xl  bg-transparent " />
-            Search
+            <p className="sm:text-white sm:bg-transparent hidden">Search</p>
           </button>
         </div>
         <div>
           <RxCross2
             onClick={() => setVal(true)}
-            className="text-white text-2xl cursor-pointer"
+            className="text-white sm:text-2xl text-lg cursor-pointer"
           />
         </div>
       </div>

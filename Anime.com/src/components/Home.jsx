@@ -94,14 +94,14 @@ export const Home = ({ dataa }) => {
           })}
         </Slider>
       </div>
-      <div className="my-10">
-        <p className="text-3xl text-white px-6 my-3 font-semibold">
+      <div className="my-10 line1">
+        <p className="line1-title text-3xl text-white px-6 my-3 font-semibold">
           Stream the First Season for Free!
         </p>
-        <p className="px-6 text-white py-1">
+        <p className="line1-disc px-6 text-white py-1">
           Check out some of our most popular titles here
         </p>
-        <div className=" w-full flex px-1">
+        <div className=" flex ">
           <Freeanime />
         </div>
       </div>
@@ -210,11 +210,11 @@ function PopularIndia() {
   };
   return (
     <>
-      <div className=" flex justify-center gap-2 my-2  text-white" onClick={scrollToTop}>
+      <div className=" flex justify-center gap-2 my-2  h-full text-white" onClick={scrollToTop}>
         {indiaanime.map((item, i) => {
           return (
             <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-              <div className="flex flex-col w-[full] cursor-pointer px-1 rounded-lg">
+              <div className="flex flex-col w-full cursor-pointer px-1 rounded-lg h-full">
                 <img key={i} className="" src={item.image} alt="item.image" />
                 <p className="font-semibold w-60 py-2 pr-4">{item.name}</p>
                 <p className="text-sm">{item.language}</p>
@@ -251,15 +251,15 @@ function Freeanime() {
   };
   return (
     <>
-      <div className="justify-center my-2   text-white w-full" onClick={scrollToTop}>
+      <div className="justify-center my-2  text-white w-full " onClick={scrollToTop}>
         <Slider {...settings} >
           {freeanime.map((item, i) => {
             return (
               <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-                <div className="flex flex-col cursor-pointer pl-4">
+                <div className="flex flex-col cursor-pointer pl-4 ">
                   <img
                     key={i}
-                    className="h-[355px]"
+                    className=""
                     src={item.image}
                     alt="item.image"
                   />

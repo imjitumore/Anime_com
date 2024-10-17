@@ -41,5 +41,27 @@
         padding: 3px 10px !important;
         font-size:  9px !important;
     }
+    .line1-title,.line1-disc
+    {
+        font-size: 13px !important;
+        margin: 0 !important;
+    }
+
+    .line1-disc
+    {
+        font-size: 10px !important;
+        margin: 0 !important;
+    }
+    .line1{
+        margin: 10px 0 !important;
+    }
+    /* .anime-gird 
+    {
+        display: grid;
+        grid-template-columns: repeat(3,1fr) !important;
+        width: 100% !important;
+    } */
+
+
 }
 

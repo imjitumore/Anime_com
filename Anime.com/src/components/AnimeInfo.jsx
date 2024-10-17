@@ -114,7 +114,7 @@ export const AnimeInfo = ({ data }) => {
       ) : (
         <div className="text-white group overflow-hidden h-full">
           <img
-            className="  sm:w-full hidden"
+            className="  sm:w-full sm:block hidden"
             src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
             alt={anime.image}
           />

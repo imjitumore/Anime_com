@@ -106,13 +106,13 @@ export const Dashboard = ({setUserr}) => {
           </Link>
         </div>
         <div className="flex gap-4 items-center">
-          <p className="text-xl text-white font-semibold flex items-center gap-2">
-            <CiUser className="text-2xl" />
+          <p className="sm:text-xl text-white font-semibold flex items-center gap-2">
+            <CiUser className="text-2xl " />
             {user.email.toUpperCase().replace("@GMAIL.COM", "")}
           </p>
           <button
             onClick={logout}
-            className=" bg-[red] text-white font-semibold px-4 py-2 rounded"
+            className=" bg-[red] sm:text-md text-sm text-white font-semibold px-4 py-2 rounded"
           >
             Logout
           </button>

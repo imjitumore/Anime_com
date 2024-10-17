@@ -14,14 +14,14 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 justify-between px-10 py-1 my-2 items-center text-white shadow-md relative ">
+      <div className="grid grid-cols-2 justify-between sm:px-10 px-3  py-1 h-14 items-center text-white shadow-md relative ">
         <div>
           <Link to={"/home"}>
-            <img className="h-12 " src={logo} alt="" />
+            <img className="sm:h-12 h-8 " src={logo} alt="" />
           </Link>
         </div>
-        <div className="flex justify-end gap-8 font-bold text-xl items-center">
-          <div>
+        <div className="flex justify-end sm:gap-8 gap-3  sm:font-bold font-semibold sm:text-xl items-center">
+          <div >
             <Link to={"/home"}>Home</Link>
           </div>
           <div>
@@ -33,11 +33,13 @@ export const Navbar = () => {
               onClick={() => setVal(false)}
             />
           </div>
-          <Link to={"/watchlist"}>
-            <div>
+          
+            <div className="sm:block hidden">
+            <Link to={"/watchlist"}>
               <CiBookmark />
+              </Link>
             </div>
-          </Link>
+          
           <Link to={"/dashboard"}>
             <div>
               <CiUser />

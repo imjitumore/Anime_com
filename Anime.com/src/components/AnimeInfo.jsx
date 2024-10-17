@@ -14,17 +14,35 @@ export const AnimeInfo = ({ data }) => {
     infinite: true,
     speed: 300,
     slidesToShow: 5,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768, // sm screens (e.g., tablets and below)
+        settings: {
+          slidesToShow: 2,  // Show 2 slides on smaller screens
+          slidesToScroll: 2, 
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 430, // xs screens (e.g., mobile)
+        settings: {
+          slidesToShow: 2,  // Show 1 slide on extra small screens
+          slidesToScroll: 2, 
+          infinite: true,
+        }
+      }
+    ]
   };
 
   const [anime, setAnime] = useState(null);
   const [seriesCategory, setSeriesCategory] = useState(null);
   const { name } = useParams();
   const { category } = useParams();
-  const [val,setVal]=useState(true)
+  const [val, setVal] = useState(true);
   console.log(seriesCategory);
   useEffect(() => {
     if (data.length > 0) {
@@ -96,20 +114,20 @@ export const AnimeInfo = ({ data }) => {
       ) : (
         <div className="text-white group overflow-hidden h-full">
           <img
-            className="  w-full"
+            className="  sm:w-full hidden"
             src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
             alt={anime.image}
           />
 
-          <div className=" flex w-full gap-4 my-4 px-4">
+          <div className=" sm:flex w-full gap-4 my-4 px-4">
             <img
-              className="h-[500px]"
+              className="sm:h-[500px]"
               src={`https://anime-com-backend.onrender.com/${anime.image}`}
-              alt=""  
+              alt=""
             />
-            <div className="bg-transparent w-full">
+            <div className="bg-transparent w-full sm:my-1 my-5">
               <iframe
-                className="w-full h-[500px] "
+                className="w-full sm:h-[500px] h-[300px] "
                 src={`https://www.youtube.com/embed/${anime.youtube}`}
                 title="YouTube video player"
                 frameBorder="0" // Add frameBorder attribute
@@ -119,50 +137,60 @@ export const AnimeInfo = ({ data }) => {
             </div>
           </div>
 
-          <p className="text-white font-semibold text-4xl px-4 my-5">{anime.name}</p>
+          <p className="text-white font-semibold sm:text-4xl text-2xl px-4 my-5">
+            {anime.name}
+          </p>
           <button
-                onClick={() => {
-                  watchList(),
-                    setVal(false),
-                    setTimeout(() => {
-                      setVal(true);
-                    }, 3000);
-                }}
-                className={`${
-                  val
-                    ? "flex bg-[#E86229] text-white mx-4 font-semibold items-center gap-2 py-3 my-3 px-6 border-[#f6baa1]"
-                    : "flex bg-white text-black mx-4 font-semibold items-center gap-2 py-3 my-3 px-6 border-[#f6baa1]"
-                }`}
-              ><FaBookmark className="bg-transparent" />Add To WatchList</button>
+            onClick={() => {
+              watchList(),
+                setVal(false),
+                setTimeout(() => {
+                  setVal(true);
+                }, 3000);
+            }}
+            className={`${
+              val
+                ? "flex bg-[#E86229] text-white mx-4 font-semibold items-center gap-2 py-3 my-3 sm:px-6 px-3 border-[#f6baa1]"
+                : "flex bg-white text-black mx-4 font-semibold rounded-lg items-center gap-2 py-3 my-3 px-6 border-[#f6baa1]"
+            }`}
+          >
+            <FaBookmark className="bg-transparent" />
+            Add To WatchList
+          </button>
           <div className="flex  gap-10">
-          <div className="px-4 text-white">
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Language:</span> {anime.language}
-            </p>
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Rating:</span> {anime.rating}
-            </p>
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Release Year:</span>{" "}
-              {anime.releaseyear}
-            </p>
-          </div>
-          <div>
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Seasons:</span> {anime.seasons}
-            </p>
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Episodes:</span> {anime.episodes}
-            </p>
-            <p className="text-lg font-semibold py-1">
-              <span className="text-[#fe6a13]">Duration:</span> {anime.duration}
-            </p>
-          </div>
+            <div className="px-4 text-white">
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Language:</span>{" "}
+                {anime.language}
+              </p>
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Rating:</span> {anime.rating}
+              </p>
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Release Year:</span>{" "}
+                {anime.releaseyear}
+              </p>
+            </div>
+            <div>
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Seasons:</span> {anime.seasons}
+              </p>
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Episodes:</span>{" "}
+                {anime.episodes}
+              </p>
+              <p className="text-lg font-semibold py-1">
+                <span className="text-[#fe6a13]">Duration:</span>{" "}
+                {anime.duration}
+              </p>
+            </div>
           </div>
           <div className="w-full  my-8">
-                <p className="text-center  text-3xl font-semibold text-[#fe6a13]">Summary</p>
-                <p className="text-lg py-2 font-semibold px-4">{anime.summary}</p>
-              </div>
+            <p className="text-center  text-3xl font-semibold text-[#fe6a13]">
+              Summary
+            </p>
+            <p className="text-lg py-2 font-semibold px-4">{anime.summary}</p>
+          </div>
         </div>
       )}
 
@@ -171,7 +199,7 @@ export const AnimeInfo = ({ data }) => {
         <p className="text-3xl font-semibold text-white px-4 my-3">
           Related Series:
         </p>
-        <div className=" px-1">
+        <div className=" am:px-1 px-2">
           <Slider {...settings}>
             {seriesCategory && seriesCategory.length > 0 ? (
               seriesCategory.slice(0, 12).map((item) => (
@@ -201,13 +229,13 @@ export const AnimeInfo = ({ data }) => {
             You Might Aslo Like
           </p>
         </div>
-        <div className="grid grid-cols-5">
-          {data.slice(50, 60).map((item, i) => {
+        <div className="grid sm:grid-cols-5 grid-cols-2 sm:mx-0 mx-2">
+          {data.slice(50, 58).map((item, i) => {
             return (
               <Link
                 to={`/animeinfo/name/${item.name}/category/${item.category}`}
               >
-                <div className="" onClick={scrollToTop}>
+                <div className="sm:mx-0" onClick={scrollToTop}>
                   <Card
                     image={item.image}
                     name={item.name}

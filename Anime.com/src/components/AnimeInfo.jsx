@@ -230,7 +230,7 @@ export const AnimeInfo = ({ data }) => {
           </p>
         </div>
         <div className="grid sm:grid-cols-5 grid-cols-2 sm:mx-0 mx-2">
-          {data.slice(50, 58).map((item, i) => {
+          {data.slice(50, 60).map((item, i) => {
             return (
               <Link
                 to={`/animeinfo/name/${item.name}/category/${item.category}`}

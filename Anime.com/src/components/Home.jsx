@@ -18,10 +18,29 @@ export const Home = ({ dataa }) => {
     speed: 300,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768, // sm screens (e.g., tablets and below)
+        settings: {
+          slidesToShow: 2,  // Show 2 slides on smaller screens
+          slidesToScroll: 2, 
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 430, // xs screens (e.g., mobile)
+        settings: {
+          slidesToShow: 2,  // Show 1 slide on extra small screens
+          slidesToScroll: 2, 
+          infinite: true,
+        }
+      }
+    ]
   };
+ 
   const settings = {
     infinite: true,
     speed: 300,
@@ -94,11 +113,11 @@ export const Home = ({ dataa }) => {
           })}
         </Slider>
       </div>
-      <div className="my-10 line1">
-        <p className="line1-title text-3xl text-white px-6 my-3 font-semibold">
+      <div className="sm:my-10 my-6  line1">
+        <p className="line1-title sm:text-3xl text-lg text-white px-6 sm:my-3 my-2 font-semibold">
           Stream the First Season for Free!
         </p>
-        <p className="line1-disc px-6 text-white py-1">
+        <p className="line1-disc sm:text-md  text-sm px-6 text-white py-1">
           Check out some of our most popular titles here
         </p>
         <div className=" flex ">
@@ -107,10 +126,10 @@ export const Home = ({ dataa }) => {
       </div>
 
       <div className="my-10 ">
-        <p className="text-3xl text-white px-6 my-3 font-semibold">
+        <p className="sm:text-3xl text-lg text-white px-6 my-3 font-semibold">
           Popular In India
         </p>
-        <p className="px-6 text-white py-1">
+        <p className="px-6 sm:text-md text-sm text-white py-1">
           Check out some of our most popular titles here
         </p>
         <div className=" w-full flex px-4 overflow-x-auto ">
@@ -122,10 +141,10 @@ export const Home = ({ dataa }) => {
       </div>
 
       <div>
-        <p className="text-3xl text-white px-6 my-3 font-semibold">
+        <p className="sm:text-3xl text-lg text-white px-6 my-3 font-semibold">
           Lovely Series
         </p>
-        <p className="px-6 text-white py-1">
+        <p className="px-6 sm:text-md text-sm text-white py-1">
           Check out some of our most popular titles here
         </p>
         <div className="flex overflow-x-auto w-full gap-1 px-4" onClick={scrollToTop}>
@@ -163,10 +182,10 @@ export const Home = ({ dataa }) => {
       </div>
 
       <div className="py-4">
-        <p className="text-3xl text-white px-6 my-3 font-semibold">
+        <p className="sm:text-3xl text-lg text-white px-6 my-3 font-semibold">
           Popular Animes
         </p>
-        <p className="px-6 text-white py-1">
+        <p className="px-6 text-white sm:text-md text-sm py-1">
           Check out some of our most popular titles here
         </p>
         <div className="px-4" onClick={scrollToTop}>
@@ -214,9 +233,9 @@ function PopularIndia() {
         {indiaanime.map((item, i) => {
           return (
             <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-              <div className="flex flex-col w-full cursor-pointer px-1 rounded-lg ">
+              <div className="flex flex-col w-full cursor-pointer px-[3px] rounded-lg ">
                 <img key={i} className="" src={item.image} alt="item.image" />
-                <p className="font-semibold sm:w-60 w-40 py-2 px-1 pr-4">{item.name}</p>
+                <p className="font-semibold sm:w-60 w-48 py-2 px-1 pr-4">{item.name}</p>
                 <p className="text-sm">{item.language}</p>
               </div>
             </Link>
@@ -247,7 +266,7 @@ function Freeanime() {
         breakpoint: 768, // sm screens (e.g., tablets and below)
         settings: {
           slidesToShow: 2,  // Show 2 slides on smaller screens
-          slidesToScroll: 1, 
+          slidesToScroll: 2, 
           infinite: true,
         }
       },
@@ -255,7 +274,7 @@ function Freeanime() {
         breakpoint: 430, // xs screens (e.g., mobile)
         settings: {
           slidesToShow: 2,  // Show 1 slide on extra small screens
-          slidesToScroll: 1, 
+          slidesToScroll: 2, 
           infinite: true,
         }
       }
@@ -271,12 +290,12 @@ function Freeanime() {
   };
   return (
     <>
-      <div className="justify-center my-2  text-white w-full " onClick={scrollToTop}>
+      <div className="justify-center my-2  text-white w-full px-2" onClick={scrollToTop}>
         <Slider {...settings} >
           {freeanime.map((item, i) => {
             return (
               <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
-                <div className="flex flex-col cursor-pointer pl-4">
+                <div className="flex flex-col cursor-pointer px-2">
                   <img
                     key={i}
                     className=""

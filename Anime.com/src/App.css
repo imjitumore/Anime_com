@@ -14,4 +14,32 @@
     {
         width: 110% !important;
     }
+    .slider-logo
+    {
+        width: 80px !important;
+    }
+    .slider-container
+    {
+        padding: 10px 20px !important;
+    }
+    .slider-subtile
+    {
+        font-size: 12px !important;
+        padding: 6px 0 !important;
+    }
+    .slider-disc
+    {
+        width: 22% !important;
+        font-size: 8px !important;
+        padding: 0 !important;
+        font-weight: 500 !important;
+        text-indent: 0;
+        line-height: normal !important;
+    }
+    .slider-btn
+    {
+        padding: 3px 10px !important;
+        font-size:  9px !important;
+    }
 }
+

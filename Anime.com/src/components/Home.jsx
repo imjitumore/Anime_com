@@ -56,7 +56,7 @@ export const Home = ({ dataa }) => {
   return (
     <>
       <Navbar />
-      <div className="shadow-2xl w-[100%]">
+      <div className="shadow-2xl w-full object-cover h-full">
         <Slider {...settings}>
           {data.map((item) => {
             return (
@@ -64,24 +64,24 @@ export const Home = ({ dataa }) => {
                 <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}        >
                   <div className="slider">
                     <img
-                      className="slider w-full h-[630px] object-cover relative "
+                      className="slider w-full  object-cover relative "
                       src={item.image}
                       alt=""
                     />
-                    <div className="absolute z-1 top-0 bg-[transparent] px-20 py-10 ">
+                    <div className="slider-container absolute z-1 top-0 bg-[transparent] px-20 py-10 ">
                       <img
-                        className="w-56 bg-[transparent]"
+                        className="slider-logo w-56 bg-[transparent]"
                         src={item.logo}
                         alt=""
                       />
-                      <p className="text-[white] py-2 pt-8 bg-[transparent] font-bold text-xl">
+                      <p className="slider-subtile text-[white] py-2 pt-8 bg-[transparent] font-bold text-xl">
                         {item.language}
                       </p>
-                      <p className="text-[white] font-semibold py-2 w-96 text-lg bg-[transparent] ">
+                      <p className="slider-disc text-[white] font-semibold py-2 w-96 text-lg bg-[transparent] ">
                         {item.Description}
                       </p>
                       <div className="bg-transparent">
-                        <button className="flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-8 border-[#E86229]">
+                        <button className=" slider-btn flex bg-[#E86229] text-white font-semibold items-center gap-2 py-2 my-3 px-8 border-[#E86229] ">
                           <FaPlay className="bg-transparent" />
                           Watch Now
                         </button>

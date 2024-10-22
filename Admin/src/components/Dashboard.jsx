@@ -138,7 +138,7 @@ function Users() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://anime-com-backend.onrender.com/api/getUsers");
+        const response = await fetch("http://localhost:4000/api/getUsers");
         const data = await response.json();
         setUsers(data.users);
         console.log(data);
@@ -193,7 +193,7 @@ function Animes({ animeData }) {
                   <div className="text-white px-3 my-3">
                     <img
                       className=""
-                      src={`https://anime-com-backend.onrender.com/${item.image}`}
+                      src={`http://localhost:4000/${item.image}`}
                       alt=""
                     />
                     <p className="text-sm w-full font-semibold my-2">
@@ -227,7 +227,7 @@ function ChangePassword() {
     }
 
     try {
-      const response = await fetch(`https://anime-com-backend.onrender.com/api/changepass/${adminId}`, {
+      const response = await fetch(`http://localhost:4000/api/changepass/${adminId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),

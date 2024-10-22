@@ -9,7 +9,7 @@ export const Watchlist = ({ data }) => {
 
     if (user && user.userId) {
       fetch(
-        `https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`
+        `http://localhost:4000/api/getwatchlist/${user.userId}`
       )
         .then((response) => {
           // if (!response.ok) {
@@ -27,7 +27,7 @@ export const Watchlist = ({ data }) => {
   function deleteAnime(name) {
     const userId = JSON.parse(localStorage.getItem("user"));
     fetch(
-      `https://anime-com-backend.onrender.com/api/removeAnime/${userId.userId}/${name}`,
+      `http://localhost:4000/api/removeAnime/${userId.userId}/${name}`,
       {
         method: "DELETE",
         headers: { "Contect-type": "application/json" },
@@ -36,7 +36,7 @@ export const Watchlist = ({ data }) => {
     )
       .then((response) => response.json())
       .then(() => {
-        fetch("https://anime-com-backend.onrender.com/api/getwatchlist")
+        fetch("http://localhost:4000/api/getwatchlist")
           .then((resp) => resp.json())
           .then((data) => setWatchlist(data));
       });
@@ -56,7 +56,7 @@ export const Watchlist = ({ data }) => {
                 <div>
                   <img
                     className="text-white w-40"
-                    src={`https://anime-com-backend.onrender.com/${item.image}`}
+                    src={`http://localhost:4000/${item.image}`}
                     alt={item.image}
                   />
                 </div>

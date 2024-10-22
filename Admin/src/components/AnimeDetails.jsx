@@ -25,7 +25,7 @@ export const AnimeDetails = ({ data }) => {
 
   async function deleteAnime(animeNAme) {
     try {
-      const response = await fetch("https://anime-com-backend.onrender.com/api/deleteAnime", {
+      const response = await fetch("http://localhost:4000/api/deleteAnime", {
         method: "DELETE",
         headers: { "Content-type": "application/json" }, // Fixed typo
         body: JSON.stringify({ name: animeNAme }) // Sending the anime name in the request body
@@ -47,7 +47,7 @@ export const AnimeDetails = ({ data }) => {
         <div>
           <img
             className="w-full"
-            src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
+            src={`http://localhost:4000/${anime.bgimage}`}
             alt=""
           />
         </div>
@@ -55,7 +55,7 @@ export const AnimeDetails = ({ data }) => {
           <div className="my-4 px-4 flex w-full gap-4">
             <img
               className="h-[500px]"
-              src={`https://anime-com-backend.onrender.com/${anime.image}`}
+              src={`http://localhost:4000/${anime.image}`}
               alt=""
             />
             <div className="bg-transparent w-full">
@@ -147,7 +147,7 @@ function UpdateForm({ anime }) {
   function updateFields() {
     const update = async () => {
       const response = await fetch(
-        `https://anime-com-backend.onrender.com/api/updateAnime/${anime.name}`,
+        `http://localhost:4000/api/updateAnime/${anime.name}`,
         {
           method: "PUT",
           headers: { "Content-type": "application/json" },

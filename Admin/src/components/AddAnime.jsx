@@ -31,7 +31,7 @@ export const AddAnime = () => {
   {
     const add = async () => {
         const response = await fetch(
-          `https://anime-com-backend.onrender.com/api/addAnime`,
+          `http://localhost:4000/api/addAnime`,
           {
             method: "POST",
             headers: { "Content-type": "application/json" },

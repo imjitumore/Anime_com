@@ -25,7 +25,7 @@ export const Dashboard = ({setUserr}) => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `https://anime-com-backend.onrender.com/api/getUsersProfile/${user.userId}`
+          `http://localhost:4000/api/getUsersProfile/${user.userId}`
         );
         const data = await response.json();
         console.log(data);
@@ -75,7 +75,7 @@ export const Dashboard = ({setUserr}) => {
     try {
       // Send the file via a POST request using fetch
       const response = await fetch(
-        `https://anime-com-backend.onrender.com/api/profile/${user.userId}`,
+        `http://localhost:4000/api/profile/${user.userId}`,
         {
           method: "POST",
           body: formData,
@@ -135,7 +135,7 @@ export const Dashboard = ({setUserr}) => {
               ) : (
                 <img
                 className="bg-transparent py-2 px-2 h-32 border-2 rounded-full"
-                  src={`https://anime-com-backend.onrender.com/${profile.profileImage}`}
+                  src={`http://localhost:4000/${profile.profileImage}`}
                   alt="Profile Image"
                 />
               )}
@@ -181,7 +181,7 @@ export const Dashboard = ({setUserr}) => {
           </li>
         </ul>
         <div className="my-20 w-full">
-          <div className="ml-6"><CiMenuBurger onClick={()=>setValue(!value)} className={`${value?"text-xl hidden":"text-xl "}`}/></div>
+          <div className="ml-6"><CiMenuBurger onClick={()=>setValue(!value)} className={`${!value?"text-xl ":"text-xl hidden  "}`}/></div>
           {allItems == "" ? (
             <UserDashboard />
           ) : allItems == "watchlist" ? (
@@ -206,7 +206,7 @@ function WatchList() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.userId) {
-      fetch(`https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`)
+      fetch(`http://localhost:4000/api/getwatchlist/${user.userId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch watchlist");
@@ -222,14 +222,14 @@ function WatchList() {
 
   function deleteAnime(name) {
     const userId = JSON.parse(localStorage.getItem("user"));
-    fetch(`https://anime-com-backend.onrender.com/api/removeAnime/${userId.userId}/${name}`, {
+    fetch(`http://localhost:4000/api/removeAnime/${userId.userId}/${name}`, {
       method: "DELETE",
       headers: { "Contect-type": "application/json" },
       body: JSON.stringify({ name }),
     })
       .then((response) => response.json())
       .then(() => {
-        fetch("https://anime-com-backend.onrender.com/api/getwatchlist")
+        fetch("http://localhost:4000/api/getwatchlist")
           .then((resp) => resp.json())
           .then((data) => setWatchlist(data));
       });
@@ -248,7 +248,7 @@ function WatchList() {
                 <div>
                   <img
                     className="text-white w-52 object-cover"
-                    src={`https://anime-com-backend.onrender.com/${item.image}`}
+                    src={`http://localhost:4000/${item.image}`}
                     alt={item.image}
                   />
                 </div>
@@ -316,7 +316,7 @@ function History() {
 
   useEffect(() => {
     // Fetch user history only once after component mount
-    fetch(`https://anime-com-backend.onrender.com/api/gethistory/${userId.userId}`)
+    fetch(`http://localhost:4000/api/gethistory/${userId.userId}`)
       .then((resp) => resp.json())
       .then((historyData) => setData(historyData)) // Set the history data
       .catch((error) => console.error("Error fetching history:", error)); // Handle any fetch errors
@@ -326,14 +326,14 @@ function History() {
       <h2 className="text-3xl sm:my-0 my-4 font-semibold leading-relaxed text-white px-4">
         History
       </h2>
-      <div className="grid sm:grid-cols-4 grid-cols-2 gap-4 mx-4">
+      <div className="grid sm:grid-cols-5 grid-cols-2 gap-4 mx-4">
         {data.map((item) => {
           return (
             <Link to={`/animeinfo/name/${item.name}/category/${item.category}`}>
               <div className="h-full sm:my-3 sm:py-0 py-2">
                 <img
                   className="py-2 "
-                  src={`https://anime-com-backend.onrender.com/${item.image}`}
+                  src={`http://localhost:4000/${item.image}`}
                   alt={item.image}
                 />
                 <p className="sm:text-xl font-semibold  my-1">{item.name}</p>
@@ -373,7 +373,7 @@ function ChangePassword() {
 
     try {
       const response = await fetch(
-        `https://anime-com-backend.onrender.com/api/changepassword/${userId}`,
+        `http://localhost:4000/api/changepassword/${userId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

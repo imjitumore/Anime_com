@@ -22,7 +22,7 @@ function App() {
   const result = async () => {
     try {
       const resp = await fetch(
-        "http://localhost:4000/api/getanimes",
+        "https://anime-backend-u76a.onrender.com/api/getanimes",
         {
           method: "GET",
           headers: { "Content-Type": "application/json" }, // Fixed header typo

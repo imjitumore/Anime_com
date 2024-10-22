@@ -64,7 +64,7 @@ export const AnimeInfo = ({ data }) => {
     if (anime) {
       const userId = JSON.parse(localStorage.getItem("user"));
       fetch(
-        `https://anime-backend-u76a.onrender.com/api/history/${userId.userId}`,
+        `https://anime-com-backend.onrender.com/api/history/${userId.userId}`,
         {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -82,7 +82,7 @@ export const AnimeInfo = ({ data }) => {
     console.log(userId);
     try {
       const response = await fetch(
-        `https://anime-backend-u76a.onrender.com/api/watchlist/${userId.userId}`,
+        `https://anime-com-backend.onrender.com/api/watchlist/${userId.userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -115,14 +115,14 @@ export const AnimeInfo = ({ data }) => {
         <div className="text-white group overflow-hidden h-full">
           <img
             className="  sm:w-full sm:block hidden"
-            src={`https://anime-backend-u76a.onrender.com/${anime.bgimage}`}
+            src={`https://anime-com-backend.onrender.com/${anime.bgimage}`}
             alt={anime.image}
           />
 
           <div className=" sm:flex w-full gap-4 my-4 px-4">
             <img
               className="sm:h-[500px]"
-              src={`https://anime-backend-u76a.onrender.com/${anime.image}`}
+              src={`https://anime-com-backend.onrender.com/${anime.image}`}
               alt=""
             />
             <div className="bg-transparent w-full sm:my-1 my-5">

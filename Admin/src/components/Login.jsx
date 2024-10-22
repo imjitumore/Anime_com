@@ -11,7 +11,7 @@ export const Login = () => {
     e.preventDefault(); // Prevent form reload
 
     try {
-      const response = await fetch("https://anime-backend-u76a.onrender.com/api/adminLogin", {
+      const response = await fetch("https://anime-com-backend.onrender.com/api/adminLogin", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email, password }),

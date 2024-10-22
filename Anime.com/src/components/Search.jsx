@@ -15,7 +15,7 @@ export const Search = () => {
 
   useEffect(() => {
     if (animeName) {
-      fetch("https://anime-backend-u76a.onrender.com/api/search", {
+      fetch("https://anime-com-backend.onrender.com/api/search", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ name: animeName }),
@@ -38,7 +38,7 @@ export const Search = () => {
                 <div className="group overflow-hidden">
                   <img
                     className=" w-full hover:scale-110 transition-all duration-300 ease-in-out"
-                    src={`https://anime-backend-u76a.onrender.com/${item.image}`}
+                    src={`https://anime-com-backend.onrender.com/${item.image}`}
                     alt={item.image}
                   />
                 </div>

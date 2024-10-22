@@ -15,7 +15,7 @@ const Login = ({setUserr}) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch('https://anime-backend-u76a.onrender.com/api/login', {
+      const response = await fetch('https://anime-com-backend.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

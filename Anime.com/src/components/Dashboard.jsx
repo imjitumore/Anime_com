@@ -181,7 +181,7 @@ export const Dashboard = ({setUserr}) => {
           </li>
         </ul>
         <div className="my-20 w-full">
-          <div className="ml-6"><CiMenuBurger onClick={()=>setValue(!value)} className={`${!value?"text-xl ":"text-xl hidden  "}`}/></div>
+          <div className="ml-6"><CiMenuBurger onClick={()=>setValue(!value)} className={`${!value?"sm:hidden text-xl ":"text-xl hidden  "}`}/></div>
           {allItems == "" ? (
             <UserDashboard />
           ) : allItems == "watchlist" ? (

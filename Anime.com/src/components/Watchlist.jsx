@@ -5,24 +5,28 @@ import { Link } from "react-router-dom";
 export const Watchlist = ({ data }) => {
   const [watchdata, setWatchlist] = useState([]);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user && user.userId) {
-      fetch(
-        `https://anime-com-backend.onrender.com/api/getwatchlist/${user.userId}`
-      )
-        .then((response) => {
-          // if (!response.ok) {
-          //   throw new Error('Failed to fetch watchlist');
-          // }
-          return response.json();
-        })
-        .then((data) => setWatchlist(data))
-        .catch((error) => console.error("Error fetching watchlist:", error));
+    const user = localStorage.getItem("user");
+  
+    // Check if user data is available and parse it correctly
+    if (user) {
+      try {
+        const userData = typeof user === "string" ? JSON.parse(user) : user;
+        if (userData && userData.userId) {
+          fetch(
+            `https://anime-com-backend.onrender.com/api/getwatchlist/${userData.userId}`
+          )
+            .then((response) => response.json())
+            .then((data) => setWatchlist(data))
+            .catch((error) => console.error("Error fetching watchlist:", error));
+        }
+      } catch (error) {
+        console.error("Error parsing user data from localStorage:", error);
+      }
     } else {
       console.error("User not found in localStorage");
     }
   }, []);
+  
 
   function deleteAnime(name) {
     const userId = JSON.parse(localStorage.getItem("user"));
